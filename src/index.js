@@ -153,11 +153,47 @@ a{color:var(--a1)}details summary{cursor:pointer;color:var(--mu);padding:4px 0}
 .tdot{width:28px;height:28px;min-width:0;padding:0;margin:0;border-radius:50%;border:2px solid var(--line);box-shadow:none}.tdot:before{display:none}.tdot:hover{transform:scale(1.18);box-shadow:none}.tdot.on{border-color:var(--tx);transform:scale(1.15)}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.ln{stroke-dashoffset:0}.ar{opacity:1}}`;
 
+const CSS2 = `html{scroll-behavior:smooth}
+:root{--navbg:rgba(8,8,24,.88)}
+[data-t=claro]{--navbg:rgba(255,255,255,.92)}
+[data-t=esmeralda]{--bg:#050b09;--b1:#0b3d2e;--b2:#134e3a;--a1:#34e3a0;--a2:#16a974;--on:#032016;--glow:22,169,116;--c1:#0f5c43;--c2:#16a974;--c3:#06261c;--pt:52,227,160;--mu:#8fb5a6}
+select{width:100%;padding:14px;border-radius:13px;border:1px solid var(--line);background:var(--inp);color:var(--tx);font:inherit}
+select:focus{outline:0;border-color:var(--a1);box-shadow:0 0 0 3px rgba(var(--glow),.25)}
+option{background:#14122e;color:#fff}
+.ic{width:22px;height:22px;flex:none}
+.app{min-height:100vh}.side{display:none}
+.mainc{max-width:1120px;margin:auto;padding:12px 14px 30px}
+.bnav+.foot{padding-bottom:100px}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:var(--navbg);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+.bnav a{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;font-size:11px;color:var(--mu);text-decoration:none;padding:5px 2px;border-radius:12px;transition:.2s}
+.bnav a.on{color:var(--a1);background:rgba(var(--glow),.14)}
+@media(min-width:900px){.app{display:grid;grid-template-columns:250px 1fr}.side{display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:rgba(0,0,0,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.side a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;color:var(--mu);text-decoration:none;font-weight:600;transition:.2s}.side a:hover{background:var(--card)}.side a.on{background:rgba(var(--glow),.16);color:var(--a1)}.side .sp{flex:1}.bnav{display:none}.top{display:none}.mainc{padding:24px 30px 40px}.bnav+.foot{padding-bottom:26px}}
+.hello h1{margin:.1em 0}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(min-width:900px){.kpis{grid-template-columns:repeat(4,1fr)}}
+.kpi{padding:14px;margin:0!important}
+.kpi .k{display:flex;align-items:center;gap:8px;color:var(--mu);font-size:12px}
+.kpi b{display:block;font-size:22px;font-variant-numeric:tabular-nums;margin-top:8px}
+.kic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(var(--glow),.18);color:var(--a1)}.kic .ic{width:18px;height:18px}
+.card.kpi.hi{background:linear-gradient(135deg,var(--a1),var(--a2));border:0;color:var(--on);box-shadow:0 14px 36px rgba(var(--glow),.35)}.kpi.hi .k{color:var(--on);opacity:.85}.kpi.hi .kic{background:rgba(0,0,0,.18);color:var(--on)}
+.donut{display:flex;align-items:center;gap:16px}.donut svg{width:130px;height:130px;flex:none}.leg{flex:1}.leg div{display:flex;align-items:center;gap:8px;font-size:13px;margin:7px 0;flex-wrap:wrap}.dot{width:10px;height:10px;border-radius:50%;flex:none}
+.rg{animation:ringin 1.4s ease both}@keyframes ringin{from{stroke-dasharray:0 100}}
+.chart{width:100%;height:150px;display:block}.chart .ln{stroke:var(--a1)}.ar2{fill:rgba(var(--glow),.2)}
+.bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a2));animation:grow 1.2s .2s cubic-bezier(.2,.8,.2,1) forwards}@keyframes grow{to{width:var(--w)}}
+.goal{padding:10px 0;animation:up .4s both}
+.scroll{overflow-x:auto}.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td{padding:11px 6px;border-top:1px solid var(--line);vertical-align:top}.tbl tr:first-child td{border-top:0}.tr{text-align:right;white-space:nowrap}
+.opt{display:block;position:relative;cursor:pointer;margin:10px 0;color:var(--tx);font-size:inherit}.opt input{position:absolute;opacity:0;pointer-events:none}
+.acct{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(var(--glow),.06);transition:.2s}.opt input:checked+.acct{border-color:var(--a1);box-shadow:0 0 0 2px rgba(var(--glow),.35)}
+.acct .num{font-family:ui-monospace,monospace;font-size:18px;letter-spacing:1px;word-break:break-all;margin:8px 0}
+.row2{display:grid;grid-template-columns:92px 1fr;gap:10px}
+.detail{margin-top:10px;font-size:13px;line-height:1.7;background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:12px;padding:10px;word-break:break-word}
+@media print{body{background:#fff!important;color:#000!important}.noprint,.bnav,.side,#bg,.gridbg,.orb,.foot{display:none!important}.card{box-shadow:none!important;background:#fff!important;border:1px solid #999!important;color:#000!important}.mu{color:#444!important}}`;
+
 const JS = `window.applyTheme=function(t){document.documentElement.dataset.t=t;try{localStorage.setItem('t',t)}catch(e){}document.querySelectorAll('.tdot').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});window.dispatchEvent(new Event('theme'))};
 document.querySelectorAll('.tdot').forEach(function(b){b.addEventListener('click',function(){applyTheme(b.dataset.t)})});
 (function(){var t=document.documentElement.dataset.t||'violeta';document.querySelectorAll('.tdot').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)})})();
 document.querySelectorAll('form').forEach(function(f){f.addEventListener('submit',function(e){if(f.dataset.s){e.preventDefault();return}f.dataset.s=1;var b=e.submitter||f.querySelector('button:not([type=button])');setTimeout(function(){if(b){b.disabled=true;b.insertAdjacentHTML('afterbegin','<i class="spin"></i>')}},0)})});
 document.querySelectorAll('[data-pw]').forEach(function(b){b.addEventListener('click',function(){var i=b.previousElementSibling;i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'Ver':'Ocultar'})});
+document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){if(navigator.clipboard)navigator.clipboard.writeText(b.dataset.copy);b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1800)})});
 document.querySelectorAll('[data-n]').forEach(function(el){var t=+el.dataset.n,s=performance.now();(function f(n){var p=Math.min((n-s)/900,1),v=Math.round(t*(1-Math.pow(1-p,3)));el.textContent=(v/100).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});if(p<1)requestAnimationFrame(f)})(s)});
 document.querySelectorAll('[data-i]').forEach(function(el){var t=+el.dataset.i,s=performance.now();(function f(n){var p=Math.min((n-s)/700,1);el.textContent=Math.round(t*p);if(p<1)requestAnimationFrame(f)})(s)});
 setTimeout(function(){document.querySelectorAll('.toast').forEach(function(t){t.style.transition='opacity .4s';t.style.opacity=0})},3800);
@@ -168,19 +204,51 @@ function rs(){var nw=innerWidth,nh=innerHeight;if(P.length&&nw===w){h=c.height=n
 function f(){x.clearRect(0,0,w,h);for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;x.fillStyle='rgba('+rgb+',.75)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();for(var j=i+1;j<P.length;j++){var q=P[j],dx=p.x-q.x,dy=p.y-q.y,d=dx*dx+dy*dy;if(d<16900){x.strokeStyle='rgba('+rgb+','+(0.3*(1-d/16900))+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}}requestAnimationFrame(f)}
 col();rs();f();addEventListener('resize',rs);addEventListener('theme',col)})();`;
 
-const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Datos inválidos.', saldo: 'Saldo insuficiente.', sol: 'Solicitud enviada, pendiente de aprobación.', bye: 'Sesión cerrada.' };
+const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', noadmin: 'Ese correo no es de un administrador.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Revisa los datos del formulario.', saldo: 'Saldo insuficiente.', dep: 'Depósito registrado. Un administrador verificará tu pago.', ret: 'Retiro solicitado. Se procesará cuando sea aprobado.', ref: 'Esa referencia de pago ya fue registrada.', nocta: 'No hay una cuenta de cobro disponible.', meta: 'Meta creada.', metax: 'Meta eliminada.', metal: 'Máximo 10 metas.', cta: 'Cuenta de cobro guardada.', ctat: 'Cuenta de cobro actualizada.', bye: 'Sesión cerrada.' };
 const LOGO = `<svg viewBox="0 0 40 40" fill="none"><path d="M20 3l14 5v10c0 9-6 15-14 19C12 33 6 27 6 18V8l14-5z" style="fill:var(--a1)"/><path d="M13 24l5-6 4 4 6-8" style="stroke:var(--on)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 const CHECK = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="11" style="stroke:var(--a1);fill:rgba(var(--glow),.15)"/><path d="M7 12.5l3.2 3.2L17 9" style="stroke:var(--a1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const CHIP = `<svg width="38" height="28" viewBox="0 0 38 28"><rect x="1" y="1" width="36" height="26" rx="6" fill="#f2c14e"/><path d="M1 10h36M1 18h36M14 1v26M24 1v26" stroke="#8a5e08" stroke-width="1.2" opacity=".55"/></svg>`;
 const brand = link => `<div class="brand">${LOGO}<div><b>Plataforma Bancaria</b>${link ? '<a class="tag" href="/admin">Ahorros Venezolanos</a>' : '<small>Ahorros Venezolanos</small>'}</div></div>`;
-const THEMES = [['violeta', '#a78bfa', '#7c3aed'], ['oceano', '#22d3ee', '#0ea5e9'], ['rubi', '#fb7185', '#e11d48'], ['oro', '#f2c14e', '#d9961a'], ['claro', '#e5e7eb', '#6366f1']];
+const THEMES = [['violeta', '#a78bfa', '#7c3aed'], ['esmeralda', '#34e3a0', '#16a974'], ['oceano', '#22d3ee', '#0ea5e9'], ['rubi', '#fb7185', '#e11d48'], ['oro', '#f2c14e', '#d9961a'], ['claro', '#e5e7eb', '#6366f1']];
 const DOTS = THEMES.map(([t, a, b]) => `<button type="button" class="tdot" data-t="${t}" title="${t}" aria-label="Tema ${t}" style="background:linear-gradient(135deg,${a},${b})"></button>`).join('');
-const shell = (body, m) => `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${NAME}</title><script>try{var t=localStorage.getItem('t');if(t)document.documentElement.dataset.t=t}catch(e){}</script><style>${CSS}</style></head><body><canvas id="bg"></canvas><i class="gridbg"></i><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>${MSG[m] ? `<div class="toast" role="status">${MSG[m]}</div>` : ''}${body}<footer class="foot"><div>Uso interno · ${NAME}</div><div class="themes">${DOTS}</div></footer><script>${JS}</script></body></html>`;
+const shell = (body, m) => `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#060912"><title>${NAME}</title><script>try{var t=localStorage.getItem('t');if(t)document.documentElement.dataset.t=t}catch(e){}</script><style>${CSS}${CSS2}</style></head><body><canvas id="bg"></canvas><i class="gridbg"></i><i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i>${MSG[m] ? `<div class="toast" role="status">${MSG[m]}</div>` : ''}${body}<footer class="foot"><div>Uso interno · ${NAME}</div><div class="themes">${DOTS}</div></footer><script>${JS}</script></body></html>`;
 const pitch = `<section class="pitch"><div class="brand" style="margin-bottom:26px">${LOGO}<div><b>${NAME}</b></div></div><h1>Ahorra con orden<br>y total claridad</h1><p class="s" style="font-size:17px">Gestiona tus depósitos, retiros y movimientos en un solo lugar.</p><ul>${['Cuentas verificadas por la administración', 'Cada movimiento queda registrado', 'Tu saldo se calcula solo con movimientos aprobados'].map(t => `<li>${CHECK}${t}</li>`).join('')}</ul></section>`;
 const auth = (t, s, inner, m, link = true) => shell(`<main class="auth">${pitch}<div class="box">${brand(link)}<div class="card glow"><h1>${t}</h1><p class="s">${s}</p>${inner}</div></div></main>`, m);
 const field = (n, l, t = 'text', x = '') => `<label for="${n}">${l}</label><input id="${n}" name="${n}" type="${t}" ${x} required>`;
 const pwf = (n, l, x = '') => `<label for="${n}">${l}</label><div class="pw"><input id="${n}" name="${n}" type="password" ${x} required><button type="button" data-pw>Ver</button></div>`;
 const EM = 'autocomplete="username" autocapitalize="none" spellcheck="false"';
+const arr = r => Array.isArray(r.data) ? r.data : [];
+const list = (a, fn, vacio) => a.length ? a.map(fn).join('') : `<div class="empty">${vacio}</div>`;
+const initial = n => esc((n || '?').trim().charAt(0).toUpperCase());
+
+const BANCOS = [['0102', 'Banco de Venezuela'], ['0104', 'Venezolano de Crédito'], ['0105', 'Mercantil'], ['0108', 'Provincial'], ['0114', 'Bancaribe'], ['0115', 'Exterior'], ['0128', 'Caroní'], ['0134', 'Banesco'], ['0137', 'Sofitasa'], ['0138', 'Plaza'], ['0151', 'BFC'], ['0156', '100% Banco'], ['0157', 'DelSur'], ['0163', 'Banco del Tesoro'], ['0166', 'Agrícola de Venezuela'], ['0168', 'Bancrecer'], ['0169', 'Mi Banco'], ['0171', 'Activo'], ['0172', 'Bancamiga'], ['0174', 'Banplus'], ['0175', 'Bicentenario'], ['0177', 'Banfanb'], ['0191', 'BNC'], ['0000', 'Otro banco']];
+const okBanco = c => BANCOS.some(b => b[0] === c);
+const bancoNombre = c => { const b = BANCOS.find(x => x[0] === c); return b ? `${b[1]} (${b[0]})` : esc(c || '—'); };
+const bancoOpts = sel => BANCOS.map(([c, n]) => `<option value="${c}"${c === sel ? ' selected' : ''}>${c} · ${n}</option>`).join('');
+
+const ic = p => `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${p}</svg>`;
+const I = {
+  home: ic('<path d="M3 11l9-8 9 8v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/>'),
+  dep: ic('<path d="M12 3v12m0 0l-4-4m4 4l4-4M4 20h16"/>'),
+  ret: ic('<path d="M12 16V4m0 0L8 8m4-4l4 4M4 20h16"/>'),
+  goal: ic('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>'),
+  users: ic('<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-5.6"/>'),
+  list: ic('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'),
+  bank: ic('<path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/>'),
+  out: ic('<path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/>'),
+  wallet: ic('<path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-3h12M16 14h.01"/>'),
+  up: ic('<path d="M7 17L17 7M9 7h8v8"/>'),
+  down: ic('<path d="M17 7L7 17M15 17H7V9"/>'),
+  clock: ic('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  alert: ic('<path d="M12 3l10 18H2zM12 10v5M12 18h.01"/>'),
+};
+const NAV_C = [['/panel', 'Resumen', I.home], ['/depositar', 'Depositar', I.dep], ['/retirar', 'Retirar', I.ret], ['/metas', 'Metas', I.goal]];
+const NAV_A = [['/admin', 'Resumen', I.home], ['/admin#cola', 'Cuentas', I.users], ['/admin#solicitudes', 'Pagos', I.wallet], ['/admin#cobro', 'Cobro', I.bank], ['/admin#auditoria', 'Auditoría', I.list]];
+function layout(me, nav, active, content, m) {
+  const links = nav.map(([h, l, i]) => `<a href="${h}" class="${h === active ? 'on' : ''}">${i}<span>${l}</span></a>`).join('');
+  return shell(`<div class="app"><aside class="side">${brand(false)}<div style="height:14px"></div>${links}<div class="sp"></div><div class="chip" style="padding:8px"><div class="av">${initial(me.nombre)}</div><div style="font-size:14px">${esc(me.nombre)}</div></div><form method="post" action="/salir"><button class="sm ghost" style="width:100%">${I.out}<span>Salir</span></button></form></aside><div class="mainc"><header class="top">${brand(false)}<div class="chip"><div class="av">${initial(me.nombre)}</div><form method="post" action="/salir"><button class="sm ghost">Salir</button></form></div></header>${content}</div></div><nav class="bnav">${links}</nav>`, m);
+}
+const top = me => `<header class="top noprint" style="display:flex">${brand(false)}<div class="chip"><div class="av">${initial(me.nombre)}</div><form method="post" action="/salir"><button class="sm ghost">Salir</button></form></div></header>`;
+const kpi = (cls, ico, lab, val, extra = '') => `<div class="card kpi ${cls}"><div class="k"><span class="kic">${ico}</span>${lab}</div><b>${val}</b>${extra}</div>`;
 
 const loginP = m => auth('Bienvenido', 'Ingresa con tu correo y contraseña', `<form method="post">${field('email', 'Correo', 'email', EM)}${pwf('pw', 'Contraseña', 'autocomplete="current-password"')}<button>Entrar</button></form><p class="mu" style="text-align:center;margin:16px 0 0">¿No tienes cuenta? <a href="/registro">Solicítala</a></p>`, m);
 const regP = m => auth('Crear cuenta', 'Un administrador revisará tu solicitud', `<form method="post">${field('nombre', 'Nombre completo', 'text', 'autocomplete="name" maxlength="80"')}${field('cedula', 'Cédula', 'text', 'maxlength="20"')}${field('email', 'Correo', 'email', EM)}${pwf('pw', 'Contraseña (mínimo 10 caracteres)', 'autocomplete="new-password" minlength="10"')}<button>Solicitar cuenta</button></form><p class="mu" style="text-align:center;margin:16px 0 0"><a href="/login">Ya tengo cuenta</a></p>`, m);
@@ -188,37 +256,79 @@ const setupP = m => auth('Crear administrador', 'Solo se puede hacer una vez', `
 const adminLoginP = m => auth('Acceso administrativo', 'Te enviaremos un código a tu correo', `<form method="post" action="/acceso">${field('email', 'Correo de administrador', 'email', EM)}<button>Enviar código</button></form><p class="mu" style="text-align:center;margin:16px 0 0"><a href="/login">Volver al inicio</a></p>`, m, false);
 const codeP = (email, m) => auth('Revisa tu correo', `Enviamos un código a <b>${esc(email)}</b>. Revisa también la carpeta de spam.`, `<form method="post"><label for="code">Código</label><input class="code" id="code" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" pattern="[0-9 ]*" required autofocus><button>Verificar</button></form><p class="mu" style="text-align:center;margin:16px 0 0"><a href="/admin">Usar otro correo</a></p>`, m, false);
 
-const top = (me, tag) => `<header class="top">${brand(false)}<div class="chip">${tag || ''}<div class="av" title="${esc(me.nombre)}">${esc((me.nombre || '?').trim().charAt(0).toUpperCase())}</div><form method="post" action="/salir"><button class="sm ghost">Salir</button></form></div></header>`;
-const solRow = (r, i) => `<div class="row" style="animation-delay:${i * 45}ms"><div><b>${r.tipo === 'DEPOSITO' ? 'Depósito' : 'Retiro'}</b><div class="mu">${fecha(r.creado)}</div></div><div style="text-align:right"><div>$ ${money(r.centavos)}</div><span class="badge ${esc(r.estado)}">${esc(r.estado)}</span></div></div>`;
-const movRow = (r, i) => `<div class="row" style="animation-delay:${i * 45}ms"><div><b>${r.centavos > 0 ? 'Ingreso' : 'Egreso'}</b><div class="mu">${fecha(r.creado)}</div></div><b class="${r.centavos > 0 ? 'pos' : 'neg'}">${r.centavos > 0 ? '+' : '−'}$ ${money(Math.abs(r.centavos))}</b></div>`;
-const list = (a, fn, vacio) => a.length ? a.map(fn).join('') : `<div class="empty">${vacio}</div>`;
-function spark(mov, s) {
-  if (mov.length < 2) return '';
+const pendP = (me, m) => shell(`<div class="wrap">${top(me)}<div class="card"><h1>Hola, ${esc((me.nombre || '').trim().split(' ')[0])}</h1><p class="s">Estado de tu cuenta: <span class="badge ${esc(me.estado)}">${esc(me.estado)}</span></p><p>${me.estado === 'RECHAZADO' ? 'Tu solicitud no fue aprobada. Comunícate con la administración.' : 'Un administrador está revisando tu solicitud. Te avisaremos cuando esté aprobada.'}</p></div></div>`, m);
+
+const donut = (p, label) => `<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="46" fill="none" style="stroke:var(--line)" stroke-width="12"/><circle class="rg" cx="60" cy="60" r="46" fill="none" style="stroke:var(--a1)" stroke-width="12" stroke-linecap="round" pathLength="100" stroke-dasharray="${p.toFixed(1)} 100" transform="rotate(-90 60 60)"/><text x="60" y="64" text-anchor="middle" style="fill:var(--tx);font-size:20px;font-weight:700">${Math.round(p)}%</text><text x="60" y="80" text-anchor="middle" style="fill:var(--mu);font-size:9px">${label}</text></svg>`;
+function chart(mov, s) {
+  if (mov.length < 2) return '<div class="empty">Aún no hay suficientes movimientos para la gráfica</div>';
   const pts = [s]; let cur = s;
   for (const r of mov) { cur -= r.centavos; pts.push(cur); }
   pts.reverse();
   const mn = Math.min(...pts), mx = Math.max(...pts), rg = mx - mn || 1;
-  const d = pts.map((v, i) => (i ? 'L' : 'M') + ((i / (pts.length - 1)) * 300).toFixed(1) + ' ' + (65 - ((v - mn) / rg) * 55).toFixed(1)).join('');
-  return `<svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none"><path class="ar" d="${d}L300 70L0 70Z" fill="rgba(255,255,255,.14)"/><path class="ln" pathLength="1" d="${d}"/></svg>`;
+  const d = pts.map((v, i) => (i ? 'L' : 'M') + ((i / (pts.length - 1)) * 300).toFixed(1) + ' ' + (105 - ((v - mn) / rg) * 90).toFixed(1)).join('');
+  return `<svg class="chart" viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0 30H300M0 60H300M0 90H300" style="stroke:var(--line);stroke-width:1;fill:none;vector-effect:non-scaling-stroke"/><path class="ar ar2" d="${d}L300 120L0 120Z"/><path class="ln" pathLength="1" d="${d}"/></svg>`;
 }
-function panelP(me, s, sols, mov, m) {
+const goalRow = (g, s, i) => { const p = Math.max(0, Math.min(100, s / g.objetivo * 100)); return `<div class="goal" style="animation-delay:${i * 45}ms"><div class="vrow"><b>${esc(g.nombre)}</b><span class="mu">${Math.round(p)}% · $ ${money(g.objetivo)}</span></div><div class="bar"><i style="--w:${p.toFixed(1)}%"></i></div></div>`; };
+const actRow = r => { const dep = r.tipo === 'DEPOSITO'; return `<tr><td><b>${dep ? 'Depósito' : 'Retiro'}</b><div class="mu">${fecha(r.creado)}</div></td><td><span class="badge ${esc(r.estado)}">${esc(r.estado)}</span></td><td class="tr ${dep ? 'pos' : 'neg'}">${dep ? '+' : '−'}$ ${money(r.centavos)}${r.estado === 'APROBADA' ? `<div><a class="mu" href="/comprobante/${r.id}">Comprobante</a></div>` : ''}</td></tr>`; };
+
+function panelP(me, d, m) {
   const first = esc((me.nombre || '').trim().split(' ')[0]);
-  if (me.estado !== 'APROBADO') return shell(`<div class="wrap">${top(me)}<div class="card"><h1>Hola, ${first}</h1><p class="s">Estado de tu cuenta: <span class="badge ${esc(me.estado)}">${esc(me.estado)}</span></p><p>${me.estado === 'RECHAZADO' ? 'Tu solicitud no fue aprobada. Comunícate con la administración.' : 'Un administrador está revisando tu solicitud. Te avisaremos cuando esté aprobada.'}</p></div></div>`, m);
-  return shell(`<div class="wrap">${top(me)}
-<section class="card vcard"><div class="vrow"><span class="lab">Cuenta de ahorro</span>${CHIP}</div><div class="lab" style="margin-top:20px">Saldo disponible</div><div class="bal">$ <span data-n="${s}">${money(s)}</span></div>${spark(mov, s)}<div class="vrow" style="margin-top:12px"><span class="holder">${esc(me.nombre)}</span><span class="badge APROBADO">Activa</span></div></section>
-<section class="card"><h2>Nueva solicitud</h2><form method="post" action="/solicitar"><div class="seg"><input type="radio" id="t1" name="tipo" value="DEPOSITO" checked><label for="t1">Depósito</label><input type="radio" id="t2" name="tipo" value="RETIRO"><label for="t2">Retiro</label></div>
-<label for="monto">Monto</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div>
-<label for="ref">Referencia (opcional)</label><input id="ref" name="referencia" maxlength="60" autocomplete="off"><button>Enviar solicitud</button></form></section>
-<div class="grid g2"><section class="card"><h2>Solicitudes</h2>${list(sols, solRow, 'Aún no hay solicitudes')}</section><section class="card"><h2>Movimientos</h2>${list(mov, movRow, 'Aún no hay movimientos')}</section></div></div>`, m);
+  const pct = d.ing > 0 ? Math.min(100, d.egr / d.ing * 100) : 0;
+  return layout(me, NAV_C, '/panel', `<div class="hello"><h1>Hola, ${first}</h1><p class="s">Resumen de tu cuenta de ahorro</p></div>
+<div class="kpis">${kpi('hi', I.wallet, 'Saldo disponible', `$ <span data-n="${d.s}">${money(d.s)}</span>`)}${kpi('', I.down, 'Ingresos', '$ ' + money(d.ing))}${kpi('', I.up, 'Egresos', '$ ' + money(d.egr))}${kpi('', I.clock, 'En revisión', `<span data-i="${d.pend}">${d.pend}</span>`, '<div class="mu">solicitudes</div>')}</div>
+<div class="grid g2" style="margin-top:14px"><section class="card"><h2>Flujo de caja</h2><div class="donut">${donut(pct, 'usado')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Ingresos <b>$ ${money(d.ing)}</b></div><div><i class="dot" style="background:var(--mu)"></i>Egresos <b>$ ${money(d.egr)}</b></div></div></div></section>
+<section class="card"><h2>Evolución del saldo</h2>${chart(d.mov, d.s)}</section></div>
+<div class="grid g2"><section class="card"><h2>Actividad reciente</h2>${d.sols.length ? `<div class="scroll"><table class="tbl"><tbody>${d.sols.map(actRow).join('')}</tbody></table></div>` : '<div class="empty">Aún no hay actividad. Haz tu primer depósito.</div>'}</section>
+<section class="card"><h2>Metas de ahorro</h2>${list(d.metas.slice(0, 3), (g, i) => goalRow(g, d.s, i), 'Crea tu primera meta de ahorro')}<a class="btn ghost sm" style="margin-top:12px" href="/metas">Ver todas</a></section></div>`, m);
 }
+function depositP(me, cuentas, m) {
+  const opts = cuentas.map((c, i) => `<label class="opt"><input type="radio" name="cuenta" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div class="num">${esc(c.numero)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button></div></label>`).join('');
+  const body = cuentas.length ? `<form method="post" action="/depositar"><h2>1 · Transfiere a esta cuenta</h2>${opts}<h2 style="margin-top:20px">2 · Registra tu pago</h2>
+<label for="monto">Monto transferido</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div>
+<label for="banco">Banco desde el que pagaste</label><select id="banco" name="banco">${bancoOpts('')}</select>
+<label for="titular">Nombre del titular de la cuenta</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
+<label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
+<label for="ref">Número de referencia</label><input id="ref" name="referencia" maxlength="30" placeholder="Ej. 00123456" autocomplete="off" required>
+<button>Registrar depósito</button></form>` : '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>';
+  return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Transfiere a la cuenta indicada y registra el pago. Un administrador lo verificará en el banco antes de acreditarlo.</p></div><section class="card">${body}</section>`, m);
+}
+const withdrawP = (me, s, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Saldo disponible: <b>$ ${money(s)}</b>. Indica la cuenta donde quieres recibir el dinero.</p></div><section class="card"><form method="post" action="/retirar">
+<label for="monto">Monto a retirar</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div>
+<label for="banco">Banco destino</label><select id="banco" name="banco">${bancoOpts('')}</select>
+<label for="num">Número de cuenta (20 dígitos)</label><input id="num" name="num_cuenta" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" placeholder="01341234561234567890" autocomplete="off" required>
+<label for="titular">Nombre del titular</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
+<label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
+<button>Solicitar retiro</button></form></section>`, m);
+const goalsP = (me, s, metas, m) => layout(me, NAV_C, '/metas', `<div class="hello"><h1>Metas de ahorro</h1><p class="s">Fija objetivos y mira cuánto avanzas con tu saldo actual.</p></div>
+<div class="grid g2"><section class="card"><h2>Nueva meta</h2><form method="post" action="/metas"><label for="n">Nombre</label><input id="n" name="nombre" maxlength="40" placeholder="Ej. Vacaciones" required><label for="o">Monto objetivo</label><div class="amt"><span>$</span><input id="o" name="objetivo" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div><button>Crear meta</button></form></section>
+<section class="card"><h2>Mis metas</h2>${list(metas, (g, i) => goalRow(g, s, i) + `<form method="post" action="/metas/borrar/${g.id}"><button class="sm ghost" style="margin-top:4px" onclick="return confirm('¿Eliminar esta meta?')">Eliminar</button></form>`, 'Aún no tienes metas')}</section></div>`, m);
+function receiptP(me, x) {
+  const dep = x.tipo === 'DEPOSITO';
+  const r = (k, v) => `<div class="row"><span class="mu">${k}</span><b style="text-align:right">${v}</b></div>`;
+  return shell(`<div class="wrap" style="max-width:640px">${top(me)}<section class="card"><div class="mu">Comprobante</div><h1>PB-${String(x.id).padStart(6, '0')}</h1>
+${r('Tipo', dep ? 'Depósito' : 'Retiro')}${r('Monto', '$ ' + money(x.centavos))}${r('Estado', `<span class="badge ${esc(x.estado)}">${esc(x.estado)}</span>`)}${r('Fecha', fecha(x.creado))}${r('Cliente', esc(x.usuarios?.nombre))}${r('Banco', bancoNombre(x.banco))}${r('Titular', esc(x.titular))}${r('Documento', esc((x.doc_tipo || '') + '-' + (x.doc_numero || '')))}${dep ? r('Referencia', esc(x.referencia)) + r('Cuenta destino', esc(x.cuentas_pago?.banco) + ' ' + esc(x.cuentas_pago?.numero)) : r('Cuenta de destino', esc(x.num_cuenta))}
+<div class="noprint" style="margin-top:14px"><button onclick="window.print()">Imprimir o guardar PDF</button><a class="btn ghost" style="margin-top:10px" href="${me.rol === 'admin' ? '/admin' : '/panel'}">Volver</a></div></section></div>`);
+}
+
 const acts = path => `<form method="post" action="${path}" class="acts"><button class="sm" name="a" value="aprobar">Aprobar</button><button class="sm danger" name="a" value="rechazar" onclick="return confirm('¿Rechazar?')">Rechazar</button></form>`;
-function adminP(me, users, sols, logs, m) {
-  const ini = n => esc((n || '?').trim().charAt(0).toUpperCase());
-  return shell(`<div class="wrap">${top(me, '<span class="badge APROBADO">Admin</span>')}
-<div class="stats"><div class="card"><div class="mu">Cuentas por aprobar</div><b data-i="${users.length}">${users.length}</b></div><div class="card"><div class="mu">Solicitudes por aprobar</div><b data-i="${sols.length}">${sols.length}</b></div></div>
-<div class="grid g2"><section class="card"><h2>Cuentas por aprobar</h2>${list(users, (x, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="who"><div class="av">${ini(x.nombre)}</div><div><b>${esc(x.nombre)}</b><div class="mu">${esc(x.cedula)} · ${esc(x.email)}</div></div></div>${acts('/admin/usuario/' + x.id)}</div>`, 'Nada pendiente')}</section>
-<section class="card"><h2>Solicitudes por aprobar</h2>${list(sols, (x, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div class="who"><div class="av">${ini(x.usuarios?.nombre)}</div><div><b>${esc(x.usuarios?.nombre)}</b><div class="mu">${esc(x.referencia)}</div></div></div><div style="text-align:right"><b>$ ${money(x.centavos)}</b><div class="mu">${x.tipo === 'DEPOSITO' ? 'Depósito' : 'Retiro'}</div></div></div>${acts('/admin/solicitud/' + x.id)}</div>`, 'Nada pendiente')}</section></div>
-<section class="card"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section></div>`, m);
+const solItem = (x, i) => { const dep = x.tipo === 'DEPOSITO'; return `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div class="who"><div class="av">${initial(x.usuarios?.nombre)}</div><div><b>${esc(x.usuarios?.nombre)}</b><div class="mu">${esc(x.usuarios?.email)}</div></div></div><div style="text-align:right"><b class="${dep ? 'pos' : 'neg'}">$ ${money(x.centavos)}</b><div class="mu">${dep ? 'Depósito' : 'Retiro'}</div></div></div>
+<div class="detail"><div>Banco: ${bancoNombre(x.banco)}</div><div>Titular: ${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</div>${dep ? `<div>Referencia: <b>${esc(x.referencia)}</b></div><div>Destino: ${esc(x.cuentas_pago?.banco)} ${esc(x.cuentas_pago?.numero)}</div>` : `<div>Cuenta destino: <b>${esc(x.num_cuenta)}</b></div>`}<div>${fecha(x.creado)}</div></div>${acts('/admin/solicitud/' + x.id)}</div>`; };
+const ctaRow = (c, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div style="font-family:ui-monospace,monospace">${esc(c.numero)}</div></div><span class="badge ${c.activo ? 'APROBADO' : 'RECHAZADO'}">${c.activo ? 'Activa' : 'Inactiva'}</span></div><form method="post" action="/admin/cuenta/${c.id}"><input type="hidden" name="v" value="${c.activo ? 0 : 1}"><button class="sm ghost" style="margin-top:10px">${c.activo ? 'Desactivar' : 'Activar'}</button></form></div>`;
+function adminP(me, d, m) {
+  const total = d.clientes.length, apr = d.clientes.filter(u => u.estado === 'APROBADO').length;
+  const pu = d.clientes.filter(u => u.estado === 'PENDIENTE'), rech = total - apr - pu.length;
+  const pct = total ? apr / total * 100 : 0;
+  const sla = d.sols.filter(x => Date.now() - new Date(x.creado) > 864e5).length;
+  const n = v => `<span data-i="${v}">${v}</span>`;
+  return layout(me, NAV_A, '/admin', `<div class="hello"><h1>Centro de administración</h1><p class="s">Verificación de cuentas y control de pagos</p></div>
+<div class="kpis">${kpi('hi', I.users, 'Clientes', n(total))}${kpi('', I.shield2 || I.users, 'Verificados', n(apr))}${kpi('', I.clock, 'Cuentas pendientes', n(pu.length))}${kpi('', I.wallet, 'Pagos pendientes', n(d.sols.length))}</div>
+<div class="grid g2" style="margin-top:14px"><section class="card"><h2>Estado de verificación</h2><div class="donut">${donut(pct, 'verificados')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Aprobados <b>${apr}</b></div><div><i class="dot" style="background:var(--warn)"></i>Pendientes <b>${pu.length}</b></div><div><i class="dot" style="background:var(--bad)"></i>Rechazados <b>${rech}</b></div></div></div></section>
+<section class="card"><h2>Alertas</h2><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Inicios fallidos (24 h)</span><b class="${d.fallos ? 'neg' : 'pos'}">${d.fallos}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.clock} Pagos con más de 24 h</span><b class="${sla ? 'neg' : 'pos'}">${sla}</b></div></section></div>
+<section class="card" id="cola"><h2>Cola de verificación</h2>${list(pu, (x, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="who"><div class="av">${initial(x.nombre)}</div><div><b>${esc(x.nombre)}</b><div class="mu">${esc(x.cedula)} · ${esc(x.email)}</div><div class="mu">${fecha(x.creado)}</div></div></div>${acts('/admin/usuario/' + x.id)}</div>`, 'Nada pendiente')}</section>
+<section class="card" id="solicitudes"><h2>Pagos por aprobar</h2><p class="mu">Antes de aprobar un depósito, confirma el pago en el estado de cuenta del banco. Al aprobar un retiro, ya debes haber hecho la transferencia.</p>${list(d.sols, solItem, 'Nada pendiente')}</section>
+<section class="card" id="cobro"><h2>Cuentas de cobro</h2>${list(d.cuentas, ctaRow, 'Aún no hay cuentas de cobro. Agrega una para recibir depósitos.')}
+<form method="post" action="/admin/cuenta" style="margin-top:16px"><h2>Agregar cuenta</h2><label for="cb">Banco</label><select id="cb" name="banco">${bancoOpts('')}</select><label for="ct">Tipo</label><select id="ct" name="tipo"><option>Corriente</option><option>Ahorro</option></select><label for="cn">Número de cuenta (20 dígitos)</label><input id="cn" name="numero" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" required><label for="cti">Titular</label><input id="cti" name="titular" maxlength="80" required><label for="cd">Documento o RIF del titular</label><input id="cd" name="doc" maxlength="20" placeholder="J-123456789" required><button>Guardar cuenta</button></form></section>
+<section class="card" id="auditoria"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(d.logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section>`, m);
 }
 
 async function route(req, env) {
@@ -278,7 +388,7 @@ async function route(req, env) {
       if (a.status === 429) return go('/admin?m=espera');
       if (!a.ok) { console.log('otp error', a.status, JSON.stringify(a.data)); return go('/admin?m=envio'); }
       await audit(env, email, 'OTP_ENVIO');
-    }
+    } else return go('/admin?m=noadmin');
     return go('/codigo', await cookie(env, { k: 'otp', m: email }, 600));
   }
 
@@ -307,44 +417,100 @@ async function route(req, env) {
   if (path === '/admin' && !post && !me) return html(adminLoginP(m));
   if (!me) return go('/login');
 
+  const cli = me.rol === 'cliente' && me.estado === 'APROBADO';
+  const NO = () => new Response('Prohibido', { status: 403 });
+  let x;
+
   if (path === '/panel' && !post) {
     if (me.rol === 'admin') return go('/admin');
-    const [sols, mov] = await Promise.all([
-      sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&order=id.desc&limit=20&select=*`),
-      sb(env, 'GET', `libro?user_id=eq.${me.id}&order=id.desc&limit=20&select=*`)]);
-    return html(panelP(me, await saldo(env, me.id), sols.data || [], mov.data || [], m));
+    if (me.estado !== 'APROBADO') return html(pendP(me, m));
+    const [lb, so, pe, mt] = await Promise.all([
+      sb(env, 'GET', `libro?user_id=eq.${me.id}&order=id.desc&select=centavos,creado`),
+      sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&order=id.desc&limit=8&select=*`),
+      sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&estado=eq.PENDIENTE&select=id`),
+      sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`)]);
+    const rows = arr(lb);
+    let s = 0, ing = 0, egr = 0;
+    for (const r of rows) { s += r.centavos; if (r.centavos > 0) ing += r.centavos; else egr -= r.centavos; }
+    return html(panelP(me, { s, ing, egr, mov: rows.slice(0, 25), sols: arr(so), pend: arr(pe).length, metas: arr(mt) }, m));
   }
 
-  if (path === '/solicitar' && post) {
-    if (me.rol !== 'cliente' || me.estado !== 'APROBADO') return new Response('Prohibido', { status: 403 });
-    const tipo = f('tipo'), c = cents(f('monto'));
-    if (!['DEPOSITO', 'RETIRO'].includes(tipo) || c === null) return go('/panel?m=inv');
-    if (tipo === 'RETIRO') {
-      const p = await sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&tipo=eq.RETIRO&estado=eq.PENDIENTE&select=centavos`);
-      const pend = (p.data || []).reduce((s, x) => s + x.centavos, 0);
-      if (c + pend > await saldo(env, me.id)) return go('/panel?m=saldo');
+  if (path === '/depositar') {
+    if (!cli) return NO();
+    if (!post) return html(depositP(me, arr(await sb(env, 'GET', 'cuentas_pago?activo=eq.true&order=id&select=*')) , m));
+    const c = cents(f('monto')), cuenta = Number(f('cuenta')), banco = f('banco');
+    const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
+    const ref = f('referencia').trim().toUpperCase().slice(0, 30);
+    if (c === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn) || !/^[A-Z0-9-]{4,30}$/.test(ref)) return go('/depositar?m=inv');
+    const ct = await sb(env, 'GET', `cuentas_pago?id=eq.${cuenta}&activo=eq.true&select=id`);
+    if (!arr(ct).length) return go('/depositar?m=nocta');
+    const dup = await sb(env, 'GET', `solicitudes?tipo=eq.DEPOSITO&banco=eq.${q(banco)}&referencia=eq.${q(ref)}&estado=neq.RECHAZADA&select=id&limit=1`);
+    if (arr(dup).length) return go('/depositar?m=ref');
+    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: c, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
+    if (!r.ok) { console.log('dep error', r.status, JSON.stringify(r.data)); return go('/depositar?m=inv'); }
+    await audit(env, me.email, 'SOLICITUD_DEPOSITO', String(c));
+    return go('/panel?m=dep');
+  }
+
+  if (path === '/retirar') {
+    if (!cli) return NO();
+    if (!post) return html(withdrawP(me, await saldo(env, me.id), m));
+    const c = cents(f('monto')), banco = f('banco'), num = f('num_cuenta').replace(/\s/g, '');
+    const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
+    if (c === null || !okBanco(banco) || !/^\d{20}$/.test(num) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn)) return go('/retirar?m=inv');
+    const p = await sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&tipo=eq.RETIRO&estado=eq.PENDIENTE&select=centavos`);
+    const pend = arr(p).reduce((s, y) => s + y.centavos, 0);
+    if (c + pend > await saldo(env, me.id)) return go('/retirar?m=saldo');
+    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'RETIRO', centavos: c, banco, num_cuenta: num, titular, doc_tipo: dt, doc_numero: dn });
+    if (!r.ok) { console.log('ret error', r.status, JSON.stringify(r.data)); return go('/retirar?m=inv'); }
+    await audit(env, me.email, 'SOLICITUD_RETIRO', String(c));
+    return go('/panel?m=ret');
+  }
+
+  if (path === '/metas') {
+    if (!cli) return NO();
+    if (!post) {
+      const mt = await sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`);
+      return html(goalsP(me, await saldo(env, me.id), arr(mt), m));
     }
-    await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo, centavos: c, referencia: f('referencia').slice(0, 60) });
-    await audit(env, me.email, 'SOLICITUD_' + tipo, String(c));
-    return go('/panel?m=sol');
+    const nombre = f('nombre').trim().slice(0, 40), obj = cents(f('objetivo'));
+    if (nombre.length < 2 || obj === null) return go('/metas?m=inv');
+    const n = await sb(env, 'GET', `metas?user_id=eq.${me.id}&select=id`);
+    if (arr(n).length >= 10) return go('/metas?m=metal');
+    await sb(env, 'POST', 'metas', { user_id: me.id, nombre, objetivo: obj });
+    return go('/metas?m=meta');
+  }
+  if (post && (x = path.match(/^\/metas\/borrar\/(\d+)$/))) {
+    if (!cli) return NO();
+    await sb(env, 'DELETE', `metas?id=eq.${x[1]}&user_id=eq.${me.id}`);
+    return go('/metas?m=metax');
   }
 
-  if (me.rol !== 'admin') return new Response('Prohibido', { status: 403 });
+  if (!post && (x = path.match(/^\/comprobante\/(\d+)$/))) {
+    const r = await sb(env, 'GET', `solicitudes?id=eq.${x[1]}&estado=eq.APROBADA&select=*,usuarios!solicitudes_user_id_fkey(nombre),cuentas_pago(banco,numero)`);
+    const s = arr(r)[0];
+    if (!s || (me.rol !== 'admin' && s.user_id !== me.id)) return new Response('No encontrado', { status: 404 });
+    return html(receiptP(me, s));
+  }
+
+  if (me.rol !== 'admin') return NO();
 
   if (path === '/admin' && !post) {
-    const [us, so, lg] = await Promise.all([
-      sb(env, 'GET', 'usuarios?estado=eq.PENDIENTE&rol=eq.cliente&order=id&select=*'),
-      sb(env, 'GET', 'solicitudes?estado=eq.PENDIENTE&order=id&select=*,usuarios(nombre)'),
-      sb(env, 'GET', 'auditoria?order=id.desc&limit=30&select=*')]);
-    return html(adminP(me, us.data || [], so.data || [], lg.data || [], m));
+    const desde = new Date(Date.now() - 864e5).toISOString();
+    const [cl, so, ct, lg, fa] = await Promise.all([
+      sb(env, 'GET', 'usuarios?rol=eq.cliente&order=id&select=id,nombre,cedula,email,estado,creado'),
+      sb(env, 'GET', 'solicitudes?estado=eq.PENDIENTE&order=id&select=*,usuarios!solicitudes_user_id_fkey(nombre,email),cuentas_pago(banco,numero)'),
+      sb(env, 'GET', 'cuentas_pago?order=id&select=*'),
+      sb(env, 'GET', 'auditoria?order=id.desc&limit=30&select=*'),
+      sb(env, 'GET', `auditoria?accion=eq.LOGIN_FALLO&creado=gte.${q(desde)}&select=id`)]);
+    return html(adminP(me, { clientes: arr(cl), sols: arr(so), cuentas: arr(ct), logs: arr(lg), fallos: arr(fa).length }, m));
   }
 
-  let x;
   if (post && (x = path.match(/^\/admin\/usuario\/(\d+)$/))) {
     const nuevo = { aprobar: 'APROBADO', rechazar: 'RECHAZADO' }[f('a')];
     if (!nuevo) return go('/admin?m=inv');
     const r = await sb(env, 'PATCH', `usuarios?id=eq.${x[1]}&estado=eq.PENDIENTE&rol=eq.cliente`, { estado: nuevo }, 'return=representation');
-    if (r.ok && r.data.length) await audit(env, me.email, 'USUARIO_' + nuevo, 'id=' + x[1]);
+    if (r.ok && arr(r).length) await audit(env, me.email, 'USUARIO_' + nuevo, 'id=' + x[1]);
     return go('/admin');
   }
   if (post && (x = path.match(/^\/admin\/solicitud\/(\d+)$/))) {
@@ -354,6 +520,21 @@ async function route(req, env) {
     if (r.ok && r.data === 'SALDO_INSUFICIENTE') return go('/admin?m=saldo');
     if (r.ok && r.data === 'OK') await audit(env, me.email, 'SOLICITUD_' + a.toUpperCase(), 'id=' + x[1]);
     return go('/admin');
+  }
+  if (post && path === '/admin/cuenta') {
+    const banco = f('banco'), numero = f('numero').replace(/\s/g, ''), titular = f('titular').trim().slice(0, 80), doc = f('doc').trim().slice(0, 20);
+    const tipo = f('tipo') === 'Ahorro' ? 'Ahorro' : 'Corriente';
+    const b = BANCOS.find(y => y[0] === banco);
+    if (!b || !/^\d{20}$/.test(numero) || titular.length < 3 || doc.length < 5) return go('/admin?m=inv');
+    const r = await sb(env, 'POST', 'cuentas_pago', { banco: b[1], codigo: b[0], tipo, numero, titular, doc });
+    if (r.ok) await audit(env, me.email, 'CUENTA_COBRO_NUEVA', b[0]);
+    return go(r.ok ? '/admin?m=cta' : '/admin?m=inv');
+  }
+  if (post && (x = path.match(/^\/admin\/cuenta\/(\d+)$/))) {
+    const on = f('v') === '1';
+    const r = await sb(env, 'PATCH', `cuentas_pago?id=eq.${x[1]}`, { activo: on });
+    if (r.ok) await audit(env, me.email, on ? 'CUENTA_ACTIVADA' : 'CUENTA_DESACTIVADA', 'id=' + x[1]);
+    return go('/admin?m=ctat');
   }
   return new Response('No encontrado', { status: 404 });
 }
