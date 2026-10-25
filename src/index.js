@@ -133,7 +133,7 @@ async function route(req, env) {
     if (!env.SETUP_TOKEN || !ex.ok || ex.data.length) return new Response('No encontrado', { status: 404 });
     if (!post) return html(setupP(m));
     const nombre = f('nombre').trim().slice(0, 80), email = f('email').trim().toLowerCase().slice(0, 120), pw = f('pw');
-    if (!eq(f('token'), env.SETUP_TOKEN) || !nombre || !email.includes('@') || pw.length < 10) return go('/crear-admin?m=mal');
+    if (!eq(f('token').trim(), String(env.SETUP_TOKEN).trim()) || !nombre || !email.includes('@') || pw.length < 10) return go('/crear-admin?m=mal');
     const r = await sb(env, 'POST', 'usuarios', { nombre, cedula: '-', email, pw: await hashPw(pw), rol: 'admin', estado: 'APROBADO' });
     if (r.ok) await audit(env, email, 'ADMIN_CREADO');
     return go('/login?m=adm');
