@@ -191,6 +191,12 @@ option{background:#14122e;color:#fff}
 .warnb{background:rgba(251,191,36,.15);color:var(--warn);padding:9px 12px;border-radius:12px;font-size:13px;margin:6px 0 10px}
 .inline{display:flex;gap:8px;align-items:flex-start;margin-top:8px}.inline .amt{flex:1}.inline button{margin-top:0;width:auto;padding:14px 18px;flex:none}
 .amt.bs input{padding-left:46px}
+.mi{position:absolute;opacity:0;pointer-events:none}
+.mtabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--inp);border:1px solid var(--line);border-radius:14px;padding:4px;margin:6px 0 14px}
+.mtabs label{margin:0;text-align:center;padding:11px;border-radius:10px;cursor:pointer;color:var(--mu);transition:.25s}
+#mt:checked~.mtabs label[for=mt],#mm:checked~.mtabs label[for=mm]{background:linear-gradient(135deg,var(--a1),var(--a2));color:var(--on);font-weight:700}
+.pane{display:none}
+#mt:checked~.pt,#mm:checked~.pm{display:block}
 @media print{body{background:#fff!important;color:#000!important}.noprint,.bnav,.side,#bg,.gridbg,.orb,.foot{display:none!important}.card{box-shadow:none!important;background:#fff!important;border:1px solid #999!important;color:#000!important}.mu{color:#444!important}}`;
 
 const JS = `window.applyTheme=function(t){document.documentElement.dataset.t=t;try{localStorage.setItem('t',t)}catch(e){}document.querySelectorAll('.tdot').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});window.dispatchEvent(new Event('theme'))};
@@ -210,7 +216,7 @@ function rs(){var nw=innerWidth,nh=innerHeight;if(P.length&&nw===w){h=c.height=n
 function f(){x.clearRect(0,0,w,h);for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;x.fillStyle='rgba('+rgb+',.75)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();for(var j=i+1;j<P.length;j++){var q=P[j],dx=p.x-q.x,dy=p.y-q.y,d=dx*dx+dy*dy;if(d<16900){x.strokeStyle='rgba('+rgb+','+(0.3*(1-d/16900))+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}}requestAnimationFrame(f)}
 col();rs();f();addEventListener('resize',rs);addEventListener('theme',col)})();`;
 
-const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', noadmin: 'Ese correo no es de un administrador.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Revisa los datos del formulario.', saldo: 'Saldo insuficiente.', disp: 'No tienes saldo disponible suficiente (los fondos de metas están bloqueados).', exc: 'El abono supera lo que falta para completar la meta.', abono: 'Abono realizado. Esos fondos quedan bloqueados hasta completar la meta.', metaf: 'No puedes eliminar una meta con fondos sin completar.', notasa: 'Aún no hay tasa del día publicada.', tasa: 'Tasa del día actualizada.', dep: 'Depósito registrado. Un administrador verificará tu pago.', ret: 'Retiro solicitado. Se procesará cuando sea aprobado.', ref: 'Esa referencia de pago ya fue registrada.', nocta: 'No hay una cuenta de cobro disponible.', meta: 'Meta creada.', metax: 'Meta eliminada.', metal: 'Máximo 10 metas.', cta: 'Cuenta de cobro guardada.', ctat: 'Cuenta de cobro actualizada.', bye: 'Sesión cerrada.' };
+const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', noadmin: 'Ese correo no es de un administrador.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Revisa los datos del formulario.', cta20: 'El número de cuenta debe tener 20 dígitos (banco 4 + oficina 4 + control 2 + cuenta 10).', ctatel: 'El teléfono de pago móvil debe tener 11 dígitos, por ejemplo 04141234567.', saldo: 'Saldo insuficiente.', disp: 'No tienes saldo disponible suficiente (los fondos de metas están bloqueados).', exc: 'El abono supera lo que falta para completar la meta.', abono: 'Abono realizado. Esos fondos quedan bloqueados hasta completar la meta.', metaf: 'No puedes eliminar una meta con fondos sin completar.', notasa: 'Aún no hay tasa del día publicada.', tasa: 'Tasa del día actualizada.', dep: 'Depósito registrado. Un administrador verificará tu pago.', ret: 'Retiro solicitado. Se procesará cuando sea aprobado.', ref: 'Esa referencia de pago ya fue registrada.', nocta: 'No hay una cuenta de cobro disponible.', meta: 'Meta creada.', metax: 'Meta eliminada.', metal: 'Máximo 10 metas.', cta: 'Cuenta de cobro guardada.', ctat: 'Cuenta de cobro actualizada.', bye: 'Sesión cerrada.' };
 const LOGO = `<svg viewBox="0 0 40 40" fill="none"><path d="M20 3l14 5v10c0 9-6 15-14 19C12 33 6 27 6 18V8l14-5z" style="fill:var(--a1)"/><path d="M13 24l5-6 4 4 6-8" style="stroke:var(--on)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 const CHECK = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="11" style="stroke:var(--a1);fill:rgba(var(--glow),.15)"/><path d="M7 12.5l3.2 3.2L17 9" style="stroke:var(--a1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const brand = link => `<div class="brand">${LOGO}<div><b>Plataforma Bancaria</b>${link ? '<a class="tag" href="/admin">Ahorros Venezolanos</a>' : '<small>Ahorros Venezolanos</small>'}</div></div>`;
@@ -301,9 +307,14 @@ function panelP(me, d, m) {
 <section class="card"><h2>Metas de ahorro</h2>${list(d.metas.slice(0, 3), goalRow, 'Crea tu primera meta de ahorro')}<a class="btn ghost sm" style="margin-top:12px" href="/metas">Ver todas</a></section></div>`, m);
 }
 function depositP(me, cuentas, tasa, m) {
-  const opts = cuentas.map((c, i) => `<label class="opt"><input type="radio" name="cuenta" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div class="num">${esc(c.numero)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button></div></label>`).join('');
-  const body = !tasa ? '<div class="empty">Aún no hay tasa del día publicada. Intenta más tarde.</div>' : !cuentas.length ? '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>' : `<form method="post" action="/depositar"><h2>1 · Transfiere a la cuenta de la plataforma</h2>${opts}<h2 style="margin-top:20px">2 · Registra tu pago</h2>
-<label for="monto">Monto transferido en bolívares</label><div class="amt bs"><span>Bs</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="dep" data-out="o1" data-t4="${depRate(tasa)}" required></div><div class="pv" id="o1"></div>
+  const cT = cuentas.filter(c => c.tipo !== 'Pago móvil'), cM = cuentas.filter(c => c.tipo === 'Pago móvil');
+  const optT = cT.map((c, i) => `<label class="opt"><input type="radio" name="cuenta_t" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div class="num">${esc(c.numero)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button></div></label>`).join('');
+  const optM = cM.map((c, i) => `<label class="opt"><input type="radio" name="cuenta_m" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>Pago móvil · ${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.titular)}</div><div class="num">${esc(c.numero)}</div><div class="mu">Cédula o RIF: ${esc(c.doc)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button> <button type="button" class="sm ghost" data-copy="${esc(c.doc)}">Copiar</button></div></label>`).join('');
+  const defM = !cT.length && cM.length > 0;
+  const body = !tasa ? '<div class="empty">Aún no hay tasa del día publicada. Intenta más tarde.</div>' : !cuentas.length ? '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>' : `<form method="post" action="/depositar"><input class="mi" type="radio" id="mt" name="metodo" value="t"${defM ? '' : ' checked'}><input class="mi" type="radio" id="mm" name="metodo" value="m"${defM ? ' checked' : ''}><h2>1 · ¿Cómo vas a pagar?</h2><div class="mtabs"><label for="mt">Transferencia</label><label for="mm">Pago móvil</label></div>
+<div class="pane pt">${optT || '<div class="empty">Transferencia no disponible por ahora.</div>'}</div><div class="pane pm">${optM || '<div class="empty">Pago móvil no disponible por ahora.</div>'}</div>
+<h2 style="margin-top:20px">2 · Registra tu pago</h2>
+<label for="monto">Monto pagado en bolívares</label><div class="amt bs"><span>Bs</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="dep" data-out="o1" data-t4="${depRate(tasa)}" required></div><div class="pv" id="o1"></div>
 <label for="banco">Banco desde el que pagaste</label><select id="banco" name="banco">${bancoOpts('')}</select>
 <label for="titular">Nombre del titular de la cuenta</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
 <label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
@@ -311,10 +322,11 @@ function depositP(me, cuentas, tasa, m) {
 <button>Registrar depósito</button></form>`;
   return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Tus bolívares se convierten a dólares con la tasa del día, así tu ahorro no se devalúa. Un administrador verifica el pago en el banco antes de acreditarlo.</p></div>${rateBarDep(tasa)}<section class="card">${body}</section>`, m);
 }
-const withdrawP = (me, disp, bloq, tasa, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Disponible para retirar: <b>$ ${money(disp)}</b>${bloq ? ` · En metas (bloqueado): <b>$ ${money(bloq)}</b>` : ''}</p></div>${rateBar(tasa)}<section class="card">${tasa ? `<form method="post" action="/retirar">
+const withdrawP = (me, disp, bloq, tasa, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Disponible para retirar: <b>$ ${money(disp)}</b>${bloq ? ` · En metas (bloqueado): <b>$ ${money(bloq)}</b>` : ''}</p></div>${rateBar(tasa)}<section class="card">${tasa ? `<form method="post" action="/retirar"><input class="mi" type="radio" id="mt" name="metodo" value="t" checked><input class="mi" type="radio" id="mm" name="metodo" value="m">
 <label for="monto">Monto a retirar en dólares</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="ret" data-out="o2" data-t4="${tasa.tasa4}" required></div><div class="pv" id="o2"></div>
-<label for="banco">Banco donde recibirás los bolívares</label><select id="banco" name="banco">${bancoOpts('')}</select>
-<label for="num">Número de cuenta (20 dígitos)</label><input id="num" name="num_cuenta" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" placeholder="01341234561234567890" autocomplete="off" required>
+<h2 style="margin-top:16px">¿Dónde quieres recibir los bolívares?</h2><div class="mtabs"><label for="mt">Transferencia</label><label for="mm">Pago móvil</label></div>
+<div class="pane pt"><label for="bt">Banco</label><select id="bt" name="banco_t">${bancoOpts('')}</select><label for="num">Número de cuenta (20 dígitos)</label><input id="num" name="num_cuenta" inputmode="numeric" maxlength="30" placeholder="01341234561234567890" autocomplete="off"></div>
+<div class="pane pm"><label for="bm">Banco</label><select id="bm" name="banco_m">${bancoOpts('')}</select><label for="tel">Teléfono de pago móvil (11 dígitos)</label><input id="tel" name="telefono" inputmode="numeric" maxlength="14" placeholder="04141234567" autocomplete="off"></div>
 <label for="titular">Nombre del titular</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
 <label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
 <button>Solicitar retiro</button></form>` : '<div class="empty">Aún no hay tasa del día publicada.</div>'}</section>`, m);
@@ -334,7 +346,7 @@ const solItem = (x, i) => {
   const dep = x.tipo === 'DEPOSITO';
   const conv = x.monto_bs ? (dep ? `<div>Pagó <b>Bs ${money(x.monto_bs)}</b> a ${tasaTxt(x.tasa4)} → acreditar <b>$ ${money(x.centavos)}</b></div>` : `<div>Retira <b>$ ${money(x.centavos)}</b> a ${tasaTxt(x.tasa4)} → transferir <b>Bs ${money(x.monto_bs)}</b></div>`) : '';
   return `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div class="who"><div class="av">${initial(x.usuarios?.nombre)}</div><div><b>${esc(x.usuarios?.nombre)}</b><div class="mu">${esc(x.usuarios?.email)}</div></div></div><div style="text-align:right"><b class="${dep ? 'pos' : 'neg'}">$ ${money(x.centavos)}</b><div class="mu">${dep ? 'Depósito' : 'Retiro'}</div></div></div>
-<div class="detail">${conv}<div>Banco: ${bancoNombre(x.banco)}</div><div>Titular: ${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</div>${dep ? `<div>Referencia: <b>${esc(x.referencia)}</b></div><div>Destino: ${esc(x.cuentas_pago?.banco)} ${esc(x.cuentas_pago?.numero)}</div>` : `<div>Cuenta destino: <b>${esc(x.num_cuenta)}</b></div>`}<div>${fecha(x.creado)}</div></div>${acts('/admin/solicitud/' + x.id)}</div>`;
+<div class="detail">${conv}<div>Banco: ${bancoNombre(x.banco)}</div><div>Titular: ${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</div>${dep ? `<div>Referencia: <b>${esc(x.referencia)}</b></div><div>Destino: ${esc(x.cuentas_pago?.banco)} ${esc(x.cuentas_pago?.numero)}</div>` : `<div>${(x.num_cuenta || '').length === 11 ? 'Pago móvil' : 'Cuenta'} destino: <b>${esc(x.num_cuenta)}</b> <button type="button" class="sm ghost" data-copy="${esc(x.num_cuenta)}">Copiar</button></div>`}<div>${fecha(x.creado)}</div></div>${acts('/admin/solicitud/' + x.id)}</div>`;
 };
 const ctaRow = (c, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div style="font-family:ui-monospace,monospace">${esc(c.numero)}</div></div><span class="badge ${c.activo ? 'APROBADO' : 'RECHAZADO'}">${c.activo ? 'Activa' : 'Inactiva'}</span></div><form method="post" action="/admin/cuenta/${c.id}"><input type="hidden" name="v" value="${c.activo ? 0 : 1}"><button class="sm ghost" style="margin-top:10px">${c.activo ? 'Desactivar' : 'Activar'}</button></form></div>`;
 function adminP(me, d, m) {
@@ -354,7 +366,8 @@ function adminP(me, d, m) {
 <form method="post" action="/admin/tasa"><label for="tasa">Nueva tasa en bolívares por 1 dólar</label><input id="tasa" name="tasa" inputmode="decimal" placeholder="900,00" autocomplete="off" required><label for="mg">Margen de protección para depósitos en % (opcional)</label><input id="mg" name="margen" inputmode="decimal" placeholder="0" autocomplete="off"><button>Publicar tasa</button></form>
 ${d.tasas.length ? `<h2 style="margin-top:16px">Historial</h2>${d.tasas.map(x => `<div class="row"><span class="mu">${fecha(x.creado)} · ${esc(x.por)}</span><b>Bs ${tasaTxt(x.tasa4)}${x.margen_bp ? ' · margen ' + (x.margen_bp / 100) + '%' : ''}</b></div>`).join('')}` : ''}</section>
 <section class="card" id="cobro"><h2>Cuentas de cobro de la plataforma</h2>${list(d.cuentas, ctaRow, 'Aún no hay cuentas de cobro. Agrega la cuenta de la plataforma para recibir depósitos.')}
-<form method="post" action="/admin/cuenta" style="margin-top:16px"><h2>Agregar cuenta</h2><label for="cb">Banco</label><select id="cb" name="banco">${bancoOpts('')}</select><label for="ct">Tipo</label><select id="ct" name="tipo"><option>Corriente</option><option>Ahorro</option></select><label for="cn">Número de cuenta (20 dígitos)</label><input id="cn" name="numero" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" required><label for="cti">Titular</label><input id="cti" name="titular" maxlength="80" required><label for="cd">Documento o RIF del titular</label><input id="cd" name="doc" maxlength="20" placeholder="J-123456789" required><button>Guardar cuenta</button></form></section>
+<form method="post" action="/admin/cuenta" style="margin-top:16px"><h2>Agregar cuenta bancaria (transferencia)</h2><label for="cb">Banco</label><select id="cb" name="banco">${bancoOpts('')}</select><label for="ct">Tipo</label><select id="ct" name="tipo"><option>Corriente</option><option>Ahorro</option></select><label for="cn">Número de cuenta (20 dígitos)</label><input id="cn" name="numero" inputmode="numeric" maxlength="30" placeholder="01910189920001234567" required><label for="cti">Titular</label><input id="cti" name="titular" maxlength="80" required><label for="cd">Cédula o RIF del titular</label><input id="cd" name="doc" maxlength="20" placeholder="J-123456789" required><button>Guardar cuenta</button></form>
+<form method="post" action="/admin/cuenta" style="margin-top:24px"><input type="hidden" name="tipo" value="Pago móvil"><h2>Agregar pago móvil</h2><label for="pb">Banco</label><select id="pb" name="banco">${bancoOpts('')}</select><label for="pn">Teléfono (11 dígitos)</label><input id="pn" name="numero" inputmode="numeric" maxlength="14" placeholder="04141234567" required><label for="pti">Titular</label><input id="pti" name="titular" maxlength="80" required><label for="pd">Cédula o RIF</label><input id="pd" name="doc" maxlength="20" placeholder="V-12345678" required><button>Guardar pago móvil</button></form></section>
 <section class="card" id="auditoria"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(d.logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section>`, m);
 }
 
@@ -473,7 +486,8 @@ async function route(req, env) {
       const [ct, ta] = await Promise.all([sb(env, 'GET', 'cuentas_pago?activo=eq.true&order=id&select=*'), getTasa(env)]);
       return html(depositP(me, arr(ct), ta, m));
     }
-    const bs = centsMax(f('monto'), 1e10), cuenta = Number(f('cuenta')), banco = f('banco');
+    const mt = f('metodo') === 'm' ? 'm' : 't';
+    const bs = centsMax(f('monto'), 1e10), cuenta = Number(f('cuenta_' + mt)), banco = f('banco');
     const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
     const ref = f('referencia').trim().toUpperCase().slice(0, 30);
     if (bs === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn) || !/^[A-Z0-9-]{4,30}$/.test(ref)) return go('/depositar?m=inv');
@@ -482,8 +496,9 @@ async function route(req, env) {
     const tD = depRate(t);
     const usd = Math.floor(bs * 10000 / tD);
     if (usd < 1) return go('/depositar?m=inv');
-    const ct = await sb(env, 'GET', `cuentas_pago?id=eq.${cuenta}&activo=eq.true&select=id`);
-    if (!arr(ct).length) return go('/depositar?m=nocta');
+    const c0 = arr(await sb(env, 'GET', `cuentas_pago?id=eq.${cuenta}&activo=eq.true&select=id,tipo`))[0];
+    if (!c0) return go('/depositar?m=nocta');
+    if ((c0.tipo === 'Pago móvil') !== (mt === 'm')) return go('/depositar?m=inv');
     const dup = await sb(env, 'GET', `solicitudes?tipo=eq.DEPOSITO&banco=eq.${q(banco)}&referencia=eq.${q(ref)}&estado=neq.RECHAZADA&select=id&limit=1`);
     if (arr(dup).length) return go('/depositar?m=ref');
     const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: usd, monto_bs: bs, tasa4: tD, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
@@ -498,12 +513,16 @@ async function route(req, env) {
       const [sd, bl, ta] = await Promise.all([saldo(env, me.id), enMetas(env, me.id), getTasa(env)]);
       return html(withdrawP(me, sd - bl, bl, ta, m));
     }
-    const c = cents(f('monto')), banco = f('banco'), num = f('num_cuenta').replace(/\s/g, '');
+    const mt = f('metodo') === 'm' ? 'm' : 't';
+    const c = cents(f('monto')), banco = f('banco_' + mt);
+    const num = (mt === 'm' ? f('telefono') : f('num_cuenta')).replace(/\D/g, '');
+    const okNum = mt === 'm' ? /^04(12|14|16|22|24|26)\d{7}$/.test(num) : /^\d{20}$/.test(num);
     const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
-    if (c === null || !okBanco(banco) || !/^\d{20}$/.test(num) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn)) return go('/retirar?m=inv');
+    if (c === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn)) return go('/retirar?m=inv');
+    if (!okNum) return go('/retirar?m=' + (mt === 'm' ? 'ctatel' : 'cta20'));
     const [sd, bl, t, p] = await Promise.all([saldo(env, me.id), enMetas(env, me.id), getTasa(env), sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&tipo=eq.RETIRO&estado=eq.PENDIENTE&select=centavos`)]);
     if (!t) return go('/retirar?m=notasa');
-    const pend = arr(p).reduce((s, y) => s + y.centavos, 0);
+    const pend = arr(p).reduce((a, y) => a + y.centavos, 0);
     if (c + pend > sd - bl) return go('/retirar?m=disp');
     const bs = Math.round(c * t.tasa4 / 10000);
     const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'RETIRO', centavos: c, monto_bs: bs, tasa4: t.tasa4, banco, num_cuenta: num, titular, doc_tipo: dt, doc_numero: dn });
@@ -594,13 +613,15 @@ async function route(req, env) {
     return go(r.ok ? '/admin?m=tasa' : '/admin?m=inv');
   }
   if (post && path === '/admin/cuenta') {
-    const banco = f('banco'), numero = f('numero').replace(/\s/g, ''), titular = f('titular').trim().slice(0, 80), doc = f('doc').trim().slice(0, 20);
-    const tipo = f('tipo') === 'Ahorro' ? 'Ahorro' : 'Corriente';
+    const banco = f('banco'), numero = f('numero').replace(/\D/g, ''), titular = f('titular').trim().slice(0, 80), doc = f('doc').trim().slice(0, 20);
+    const tipo = ['Ahorro', 'Pago móvil'].includes(f('tipo')) ? f('tipo') : 'Corriente';
     const b = BANCOS.find(y => y[0] === banco);
-    if (!b || !/^\d{20}$/.test(numero) || titular.length < 3 || doc.length < 5) return go('/admin?m=inv');
+    const okNum = tipo === 'Pago móvil' ? /^04(12|14|16|22|24|26)\d{7}$/.test(numero) : /^\d{20}$/.test(numero);
+    if (!okNum) return go('/admin?m=' + (tipo === 'Pago móvil' ? 'ctatel' : 'cta20') + '#cobro');
+    if (!b || titular.length < 3 || doc.length < 5) return go('/admin?m=inv#cobro');
     const r = await sb(env, 'POST', 'cuentas_pago', { banco: b[1], codigo: b[0], tipo, numero, titular, doc });
-    if (r.ok) await audit(env, me.email, 'CUENTA_COBRO_NUEVA', b[0]);
-    return go(r.ok ? '/admin?m=cta' : '/admin?m=inv');
+    if (r.ok) await audit(env, me.email, 'CUENTA_COBRO_NUEVA', tipo + ' ' + b[0]);
+    return go(r.ok ? '/admin?m=cta#cobro' : '/admin?m=inv#cobro');
   }
   if (post && (x = path.match(/^\/admin\/cuenta\/(\d+)$/))) {
     const on = f('v') === '1';
