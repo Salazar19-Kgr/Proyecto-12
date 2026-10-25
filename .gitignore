@@ -1,0 +1,7 @@
+venv/
+node_modules/
+.env
+.dev.vars
+*.db
+secret.key
+__pycache__/
