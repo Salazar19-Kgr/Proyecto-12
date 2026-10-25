@@ -163,11 +163,11 @@ option{background:#14122e;color:#fff}
 .ic{width:22px;height:22px;flex:none}
 .app{min-height:100vh}.side{display:none}
 .mainc{max-width:1120px;margin:auto;padding:12px 14px 30px}
-.bnav+.foot{padding-bottom:100px}
 .bnav{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:space-around;padding:8px 6px calc(8px + env(safe-area-inset-bottom));background:var(--navbg);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
 .bnav a{display:flex;flex-direction:column;align-items:center;gap:2px;flex:1;font-size:11px;color:var(--mu);text-decoration:none;padding:5px 2px;border-radius:12px;transition:.2s}
 .bnav a.on{color:var(--a1);background:rgba(var(--glow),.14)}
-@media(min-width:900px){.app{display:grid;grid-template-columns:250px 1fr}.side{display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:rgba(0,0,0,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.side a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;color:var(--mu);text-decoration:none;font-weight:600;transition:.2s}.side a:hover{background:var(--card)}.side a.on{background:rgba(var(--glow),.16);color:var(--a1)}.side .sp{flex:1}.bnav{display:none}.top{display:none}.mainc{padding:24px 30px 40px}.bnav+.foot{padding-bottom:26px}}
+.foot{padding-bottom:90px}
+@media(min-width:900px){.app{display:grid;grid-template-columns:250px 1fr}.side{display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh;padding:20px 14px;border-right:1px solid var(--line);background:rgba(0,0,0,.18);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}.side a{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;color:var(--mu);text-decoration:none;font-weight:600;transition:.2s}.side a:hover{background:var(--card)}.side a.on{background:rgba(var(--glow),.16);color:var(--a1)}.side .sp{flex:1}.bnav{display:none}.app .top{display:none}.mainc{padding:24px 30px 40px}.foot{padding-bottom:26px}}
 .hello h1{margin:.1em 0}
 .kpis{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(min-width:900px){.kpis{grid-template-columns:repeat(4,1fr)}}
 .kpi{padding:14px;margin:0!important}
@@ -179,13 +179,18 @@ option{background:#14122e;color:#fff}
 .rg{animation:ringin 1.4s ease both}@keyframes ringin{from{stroke-dasharray:0 100}}
 .chart{width:100%;height:150px;display:block}.chart .ln{stroke:var(--a1)}.ar2{fill:rgba(var(--glow),.2)}
 .bar{height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,var(--a1),var(--a2));animation:grow 1.2s .2s cubic-bezier(.2,.8,.2,1) forwards}@keyframes grow{to{width:var(--w)}}
-.goal{padding:10px 0;animation:up .4s both}
+.goal{padding:12px 0 4px;animation:up .4s both}
 .scroll{overflow-x:auto}.tbl{width:100%;border-collapse:collapse;font-size:14px}.tbl td{padding:11px 6px;border-top:1px solid var(--line);vertical-align:top}.tbl tr:first-child td{border-top:0}.tr{text-align:right;white-space:nowrap}
 .opt{display:block;position:relative;cursor:pointer;margin:10px 0;color:var(--tx);font-size:inherit}.opt input{position:absolute;opacity:0;pointer-events:none}
 .acct{border:1px solid var(--line);border-radius:16px;padding:14px;background:rgba(var(--glow),.06);transition:.2s}.opt input:checked+.acct{border-color:var(--a1);box-shadow:0 0 0 2px rgba(var(--glow),.35)}
 .acct .num{font-family:ui-monospace,monospace;font-size:18px;letter-spacing:1px;word-break:break-all;margin:8px 0}
 .row2{display:grid;grid-template-columns:92px 1fr;gap:10px}
 .detail{margin-top:10px;font-size:13px;line-height:1.7;background:rgba(0,0,0,.18);border:1px solid var(--line);border-radius:12px;padding:10px;word-break:break-word}
+.pv{margin-top:8px;font-size:15px;font-weight:700;color:var(--a1);min-height:1.3em}
+.rate{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 12px;border-radius:12px;background:rgba(var(--glow),.13);font-size:13px;margin:6px 0 10px}.rate .ic{width:18px;height:18px}
+.warnb{background:rgba(251,191,36,.15);color:var(--warn);padding:9px 12px;border-radius:12px;font-size:13px;margin:6px 0 10px}
+.inline{display:flex;gap:8px;align-items:flex-start;margin-top:8px}.inline .amt{flex:1}.inline button{margin-top:0;width:auto;padding:14px 18px;flex:none}
+.amt.bs input{padding-left:46px}
 @media print{body{background:#fff!important;color:#000!important}.noprint,.bnav,.side,#bg,.gridbg,.orb,.foot{display:none!important}.card{box-shadow:none!important;background:#fff!important;border:1px solid #999!important;color:#000!important}.mu{color:#444!important}}`;
 
 const JS = `window.applyTheme=function(t){document.documentElement.dataset.t=t;try{localStorage.setItem('t',t)}catch(e){}document.querySelectorAll('.tdot').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});window.dispatchEvent(new Event('theme'))};
@@ -194,6 +199,7 @@ document.querySelectorAll('.tdot').forEach(function(b){b.addEventListener('click
 document.querySelectorAll('form').forEach(function(f){f.addEventListener('submit',function(e){if(f.dataset.s){e.preventDefault();return}f.dataset.s=1;var b=e.submitter||f.querySelector('button:not([type=button])');setTimeout(function(){if(b){b.disabled=true;b.insertAdjacentHTML('afterbegin','<i class="spin"></i>')}},0)})});
 document.querySelectorAll('[data-pw]').forEach(function(b){b.addEventListener('click',function(){var i=b.previousElementSibling;i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'Ver':'Ocultar'})});
 document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){if(navigator.clipboard)navigator.clipboard.writeText(b.dataset.copy);b.textContent='Copiado';setTimeout(function(){b.textContent='Copiar'},1800)})});
+document.querySelectorAll('[data-conv]').forEach(function(i){var o=document.getElementById(i.dataset.out),t=+i.dataset.t4,m=i.dataset.conv;function u(){var v=parseFloat(String(i.value).replace(',','.'));if(!(v>0)||!t){o.textContent='';return}var c=Math.round(v*100);if(m==='dep'){o.textContent='Recibirás $ '+(Math.floor(c*10000/t)/100).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})}else{o.textContent='Recibirás Bs '+(Math.round(c*t/10000)/100).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2})}}i.addEventListener('input',u)});
 document.querySelectorAll('[data-n]').forEach(function(el){var t=+el.dataset.n,s=performance.now();(function f(n){var p=Math.min((n-s)/900,1),v=Math.round(t*(1-Math.pow(1-p,3)));el.textContent=(v/100).toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});if(p<1)requestAnimationFrame(f)})(s)});
 document.querySelectorAll('[data-i]').forEach(function(el){var t=+el.dataset.i,s=performance.now();(function f(n){var p=Math.min((n-s)/700,1);el.textContent=Math.round(t*p);if(p<1)requestAnimationFrame(f)})(s)});
 setTimeout(function(){document.querySelectorAll('.toast').forEach(function(t){t.style.transition='opacity .4s';t.style.opacity=0})},3800);
@@ -204,7 +210,7 @@ function rs(){var nw=innerWidth,nh=innerHeight;if(P.length&&nw===w){h=c.height=n
 function f(){x.clearRect(0,0,w,h);for(var i=0;i<P.length;i++){var p=P[i];p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>w)p.vx*=-1;if(p.y<0||p.y>h)p.vy*=-1;x.fillStyle='rgba('+rgb+',.75)';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();for(var j=i+1;j<P.length;j++){var q=P[j],dx=p.x-q.x,dy=p.y-q.y,d=dx*dx+dy*dy;if(d<16900){x.strokeStyle='rgba('+rgb+','+(0.3*(1-d/16900))+')';x.lineWidth=1;x.beginPath();x.moveTo(p.x,p.y);x.lineTo(q.x,q.y);x.stroke()}}}requestAnimationFrame(f)}
 col();rs();f();addEventListener('resize',rs);addEventListener('theme',col)})();`;
 
-const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', noadmin: 'Ese correo no es de un administrador.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Revisa los datos del formulario.', saldo: 'Saldo insuficiente.', dep: 'Depósito registrado. Un administrador verificará tu pago.', ret: 'Retiro solicitado. Se procesará cuando sea aprobado.', ref: 'Esa referencia de pago ya fue registrada.', nocta: 'No hay una cuenta de cobro disponible.', meta: 'Meta creada.', metax: 'Meta eliminada.', metal: 'Máximo 10 metas.', cta: 'Cuenta de cobro guardada.', ctat: 'Cuenta de cobro actualizada.', bye: 'Sesión cerrada.' };
+const MSG = { bloq: 'Demasiados intentos. Espera 10 minutos.', mal: 'Datos incorrectos.', cod: 'Código incorrecto o vencido.', espera: 'Espera un minuto antes de pedir otro código.', envio: 'No se pudo enviar el código. Revisa la configuración de correo.', noadmin: 'Ese correo no es de un administrador.', reg: 'Solicitud recibida. Tu cuenta queda pendiente de aprobación.', adm: 'Administrador creado. Ingresa tu correo para recibir el código.', inv: 'Revisa los datos del formulario.', saldo: 'Saldo insuficiente.', disp: 'No tienes saldo disponible suficiente (los fondos de metas están bloqueados).', exc: 'El abono supera lo que falta para completar la meta.', abono: 'Abono realizado. Esos fondos quedan bloqueados hasta completar la meta.', metaf: 'No puedes eliminar una meta con fondos sin completar.', notasa: 'Aún no hay tasa del día publicada.', tasa: 'Tasa del día actualizada.', dep: 'Depósito registrado. Un administrador verificará tu pago.', ret: 'Retiro solicitado. Se procesará cuando sea aprobado.', ref: 'Esa referencia de pago ya fue registrada.', nocta: 'No hay una cuenta de cobro disponible.', meta: 'Meta creada.', metax: 'Meta eliminada.', metal: 'Máximo 10 metas.', cta: 'Cuenta de cobro guardada.', ctat: 'Cuenta de cobro actualizada.', bye: 'Sesión cerrada.' };
 const LOGO = `<svg viewBox="0 0 40 40" fill="none"><path d="M20 3l14 5v10c0 9-6 15-14 19C12 33 6 27 6 18V8l14-5z" style="fill:var(--a1)"/><path d="M13 24l5-6 4 4 6-8" style="stroke:var(--on)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>`;
 const CHECK = `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="11" style="stroke:var(--a1);fill:rgba(var(--glow),.15)"/><path d="M7 12.5l3.2 3.2L17 9" style="stroke:var(--a1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const brand = link => `<div class="brand">${LOGO}<div><b>Plataforma Bancaria</b>${link ? '<a class="tag" href="/admin">Ahorros Venezolanos</a>' : '<small>Ahorros Venezolanos</small>'}</div></div>`;
@@ -219,6 +225,13 @@ const EM = 'autocomplete="username" autocapitalize="none" spellcheck="false"';
 const arr = r => Array.isArray(r.data) ? r.data : [];
 const list = (a, fn, vacio) => a.length ? a.map(fn).join('') : `<div class="empty">${vacio}</div>`;
 const initial = n => esc((n || '?').trim().charAt(0).toUpperCase());
+function centsMax(s, max) {
+  const t = s.trim().replace(',', '.');
+  if (!/^\d{1,10}(\.\d{1,2})?$/.test(t)) return null;
+  const c = Math.round(parseFloat(t) * 100);
+  return c > 0 && c <= max ? c : null;
+}
+const tasaTxt = t4 => (t4 / 10000).toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
 
 const BANCOS = [['0102', 'Banco de Venezuela'], ['0104', 'Venezolano de Crédito'], ['0105', 'Mercantil'], ['0108', 'Provincial'], ['0114', 'Bancaribe'], ['0115', 'Exterior'], ['0128', 'Caroní'], ['0134', 'Banesco'], ['0137', 'Sofitasa'], ['0138', 'Plaza'], ['0151', 'BFC'], ['0156', '100% Banco'], ['0157', 'DelSur'], ['0163', 'Banco del Tesoro'], ['0166', 'Agrícola de Venezuela'], ['0168', 'Bancrecer'], ['0169', 'Mi Banco'], ['0171', 'Activo'], ['0172', 'Bancamiga'], ['0174', 'Banplus'], ['0175', 'Bicentenario'], ['0177', 'Banfanb'], ['0191', 'BNC'], ['0000', 'Otro banco']];
 const okBanco = c => BANCOS.some(b => b[0] === c);
@@ -232,17 +245,18 @@ const I = {
   ret: ic('<path d="M12 16V4m0 0L8 8m4-4l4 4M4 20h16"/>'),
   goal: ic('<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/>'),
   users: ic('<circle cx="9" cy="8" r="4"/><path d="M2 21c0-4 3-6 7-6s7 2 7 6M17 4a4 4 0 0 1 0 8M22 21c0-3-2-5-4-5.6"/>'),
-  list: ic('<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'),
   bank: ic('<path d="M3 10l9-6 9 6M5 10v8M9 10v8M15 10v8M19 10v8M3 21h18"/>'),
   out: ic('<path d="M9 21H5V3h4M16 17l5-5-5-5M21 12H9"/>'),
   wallet: ic('<path d="M3 7h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l2-3h12M16 14h.01"/>'),
   up: ic('<path d="M7 17L17 7M9 7h8v8"/>'),
   down: ic('<path d="M17 7L7 17M15 17H7V9"/>'),
   clock: ic('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  lock: ic('<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>'),
   alert: ic('<path d="M12 3l10 18H2zM12 10v5M12 18h.01"/>'),
 };
+const rateBar = t => t ? `<div class="rate">${I.clock}<span>Tasa del día: <b>Bs ${tasaTxt(t.tasa4)}</b> por $ 1</span><span class="mu">${fecha(t.creado)}</span></div>` : '<div class="warnb">Aún no hay tasa del día publicada.</div>';
 const NAV_C = [['/panel', 'Resumen', I.home], ['/depositar', 'Depositar', I.dep], ['/retirar', 'Retirar', I.ret], ['/metas', 'Metas', I.goal]];
-const NAV_A = [['/admin', 'Resumen', I.home], ['/admin#cola', 'Cuentas', I.users], ['/admin#solicitudes', 'Pagos', I.wallet], ['/admin#cobro', 'Cobro', I.bank], ['/admin#auditoria', 'Auditoría', I.list]];
+const NAV_A = [['/admin', 'Resumen', I.home], ['/admin#cola', 'Cuentas', I.users], ['/admin#solicitudes', 'Pagos', I.wallet], ['/admin#tasa', 'Tasa', I.clock], ['/admin#cobro', 'Cobro', I.bank]];
 function layout(me, nav, active, content, m) {
   const links = nav.map(([h, l, i]) => `<a href="${h}" class="${h === active ? 'on' : ''}">${i}<span>${l}</span></a>`).join('');
   return shell(`<div class="app"><aside class="side">${brand(false)}<div style="height:14px"></div>${links}<div class="sp"></div><div class="chip" style="padding:8px"><div class="av">${initial(me.nombre)}</div><div style="font-size:14px">${esc(me.nombre)}</div></div><form method="post" action="/salir"><button class="sm ghost" style="width:100%">${I.out}<span>Salir</span></button></form></aside><div class="mainc"><header class="top">${brand(false)}<div class="chip"><div class="av">${initial(me.nombre)}</div><form method="post" action="/salir"><button class="sm ghost">Salir</button></form></div></header>${content}</div></div><nav class="bnav">${links}</nav>`, m);
@@ -268,68 +282,82 @@ function chart(mov, s) {
   const d = pts.map((v, i) => (i ? 'L' : 'M') + ((i / (pts.length - 1)) * 300).toFixed(1) + ' ' + (105 - ((v - mn) / rg) * 90).toFixed(1)).join('');
   return `<svg class="chart" viewBox="0 0 300 120" preserveAspectRatio="none"><path d="M0 30H300M0 60H300M0 90H300" style="stroke:var(--line);stroke-width:1;fill:none;vector-effect:non-scaling-stroke"/><path class="ar ar2" d="${d}L300 120L0 120Z"/><path class="ln" pathLength="1" d="${d}"/></svg>`;
 }
-const goalRow = (g, s, i) => { const p = Math.max(0, Math.min(100, s / g.objetivo * 100)); return `<div class="goal" style="animation-delay:${i * 45}ms"><div class="vrow"><b>${esc(g.nombre)}</b><span class="mu">${Math.round(p)}% · $ ${money(g.objetivo)}</span></div><div class="bar"><i style="--w:${p.toFixed(1)}%"></i></div></div>`; };
+const goalRow = (g, i) => {
+  const p = Math.max(0, Math.min(100, g.ahorrado / g.objetivo * 100)), done = g.ahorrado >= g.objetivo;
+  return `<div class="goal" style="animation-delay:${i * 45}ms"><div class="vrow"><b>${esc(g.nombre)}</b><span class="badge ${done ? 'APROBADA' : 'PENDIENTE'}">${done ? 'Completada' : 'Bloqueada'}</span></div><div class="mu">$ ${money(g.ahorrado)} de $ ${money(g.objetivo)} · ${Math.round(p)}%</div><div class="bar"><i style="--w:${p.toFixed(1)}%"></i></div></div>`;
+};
 const actRow = r => { const dep = r.tipo === 'DEPOSITO'; return `<tr><td><b>${dep ? 'Depósito' : 'Retiro'}</b><div class="mu">${fecha(r.creado)}</div></td><td><span class="badge ${esc(r.estado)}">${esc(r.estado)}</span></td><td class="tr ${dep ? 'pos' : 'neg'}">${dep ? '+' : '−'}$ ${money(r.centavos)}${r.estado === 'APROBADA' ? `<div><a class="mu" href="/comprobante/${r.id}">Comprobante</a></div>` : ''}</td></tr>`; };
 
 function panelP(me, d, m) {
   const first = esc((me.nombre || '').trim().split(' ')[0]);
   const pct = d.ing > 0 ? Math.min(100, d.egr / d.ing * 100) : 0;
-  return layout(me, NAV_C, '/panel', `<div class="hello"><h1>Hola, ${first}</h1><p class="s">Resumen de tu cuenta de ahorro</p></div>
-<div class="kpis">${kpi('hi', I.wallet, 'Saldo disponible', `$ <span data-n="${d.s}">${money(d.s)}</span>`)}${kpi('', I.down, 'Ingresos', '$ ' + money(d.ing))}${kpi('', I.up, 'Egresos', '$ ' + money(d.egr))}${kpi('', I.clock, 'En revisión', `<span data-i="${d.pend}">${d.pend}</span>`, '<div class="mu">solicitudes</div>')}</div>
-<div class="grid g2" style="margin-top:14px"><section class="card"><h2>Flujo de caja</h2><div class="donut">${donut(pct, 'usado')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Ingresos <b>$ ${money(d.ing)}</b></div><div><i class="dot" style="background:var(--mu)"></i>Egresos <b>$ ${money(d.egr)}</b></div></div></div></section>
+  return layout(me, NAV_C, '/panel', `<div class="hello"><h1>Hola, ${first}</h1><p class="s">Cuenta de ahorro N.º PB-${String(me.id).padStart(6, '0')} · saldo en dólares</p></div>${rateBar(d.tasa)}
+<div class="kpis">${kpi('hi', I.wallet, 'Saldo total', `$ <span data-n="${d.s}">${money(d.s)}</span>`)}${kpi('', I.down, 'Disponible para retirar', '$ ' + money(d.s - d.bloq))}${kpi('', I.lock, 'Bloqueado en metas', '$ ' + money(d.bloq))}${kpi('', I.clock, 'En revisión', `<span data-i="${d.pend}">${d.pend}</span>`, '<div class="mu">solicitudes</div>')}</div>
+<div class="grid g2" style="margin-top:14px"><section class="card"><h2>Flujo de caja</h2><div class="donut">${donut(pct, 'retirado')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Ingresos <b>$ ${money(d.ing)}</b></div><div><i class="dot" style="background:var(--mu)"></i>Egresos <b>$ ${money(d.egr)}</b></div></div></div></section>
 <section class="card"><h2>Evolución del saldo</h2>${chart(d.mov, d.s)}</section></div>
 <div class="grid g2"><section class="card"><h2>Actividad reciente</h2>${d.sols.length ? `<div class="scroll"><table class="tbl"><tbody>${d.sols.map(actRow).join('')}</tbody></table></div>` : '<div class="empty">Aún no hay actividad. Haz tu primer depósito.</div>'}</section>
-<section class="card"><h2>Metas de ahorro</h2>${list(d.metas.slice(0, 3), (g, i) => goalRow(g, d.s, i), 'Crea tu primera meta de ahorro')}<a class="btn ghost sm" style="margin-top:12px" href="/metas">Ver todas</a></section></div>`, m);
+<section class="card"><h2>Metas de ahorro</h2>${list(d.metas.slice(0, 3), goalRow, 'Crea tu primera meta de ahorro')}<a class="btn ghost sm" style="margin-top:12px" href="/metas">Ver todas</a></section></div>`, m);
 }
-function depositP(me, cuentas, m) {
+function depositP(me, cuentas, tasa, m) {
   const opts = cuentas.map((c, i) => `<label class="opt"><input type="radio" name="cuenta" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div class="num">${esc(c.numero)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button></div></label>`).join('');
-  const body = cuentas.length ? `<form method="post" action="/depositar"><h2>1 · Transfiere a esta cuenta</h2>${opts}<h2 style="margin-top:20px">2 · Registra tu pago</h2>
-<label for="monto">Monto transferido</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div>
+  const body = !tasa ? '<div class="empty">Aún no hay tasa del día publicada. Intenta más tarde.</div>' : !cuentas.length ? '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>' : `<form method="post" action="/depositar"><h2>1 · Transfiere a la cuenta de la plataforma</h2>${opts}<h2 style="margin-top:20px">2 · Registra tu pago</h2>
+<label for="monto">Monto transferido en bolívares</label><div class="amt bs"><span>Bs</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="dep" data-out="o1" data-t4="${tasa.tasa4}" required></div><div class="pv" id="o1"></div>
 <label for="banco">Banco desde el que pagaste</label><select id="banco" name="banco">${bancoOpts('')}</select>
 <label for="titular">Nombre del titular de la cuenta</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
 <label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
 <label for="ref">Número de referencia</label><input id="ref" name="referencia" maxlength="30" placeholder="Ej. 00123456" autocomplete="off" required>
-<button>Registrar depósito</button></form>` : '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>';
-  return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Transfiere a la cuenta indicada y registra el pago. Un administrador lo verificará en el banco antes de acreditarlo.</p></div><section class="card">${body}</section>`, m);
+<button>Registrar depósito</button></form>`;
+  return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Tus bolívares se convierten a dólares con la tasa del día, así tu ahorro no se devalúa. Un administrador verifica el pago en el banco antes de acreditarlo.</p></div>${rateBar(tasa)}<section class="card">${body}</section>`, m);
 }
-const withdrawP = (me, s, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Saldo disponible: <b>$ ${money(s)}</b>. Indica la cuenta donde quieres recibir el dinero.</p></div><section class="card"><form method="post" action="/retirar">
-<label for="monto">Monto a retirar</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div>
-<label for="banco">Banco destino</label><select id="banco" name="banco">${bancoOpts('')}</select>
+const withdrawP = (me, disp, bloq, tasa, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Disponible para retirar: <b>$ ${money(disp)}</b>${bloq ? ` · En metas (bloqueado): <b>$ ${money(bloq)}</b>` : ''}</p></div>${rateBar(tasa)}<section class="card">${tasa ? `<form method="post" action="/retirar">
+<label for="monto">Monto a retirar en dólares</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="ret" data-out="o2" data-t4="${tasa.tasa4}" required></div><div class="pv" id="o2"></div>
+<label for="banco">Banco donde recibirás los bolívares</label><select id="banco" name="banco">${bancoOpts('')}</select>
 <label for="num">Número de cuenta (20 dígitos)</label><input id="num" name="num_cuenta" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" placeholder="01341234561234567890" autocomplete="off" required>
 <label for="titular">Nombre del titular</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
 <label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
-<button>Solicitar retiro</button></form></section>`, m);
-const goalsP = (me, s, metas, m) => layout(me, NAV_C, '/metas', `<div class="hello"><h1>Metas de ahorro</h1><p class="s">Fija objetivos y mira cuánto avanzas con tu saldo actual.</p></div>
-<div class="grid g2"><section class="card"><h2>Nueva meta</h2><form method="post" action="/metas"><label for="n">Nombre</label><input id="n" name="nombre" maxlength="40" placeholder="Ej. Vacaciones" required><label for="o">Monto objetivo</label><div class="amt"><span>$</span><input id="o" name="objetivo" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div><button>Crear meta</button></form></section>
-<section class="card"><h2>Mis metas</h2>${list(metas, (g, i) => goalRow(g, s, i) + `<form method="post" action="/metas/borrar/${g.id}"><button class="sm ghost" style="margin-top:4px" onclick="return confirm('¿Eliminar esta meta?')">Eliminar</button></form>`, 'Aún no tienes metas')}</section></div>`, m);
+<button>Solicitar retiro</button></form>` : '<div class="empty">Aún no hay tasa del día publicada.</div>'}</section>`, m);
+const goalsP = (me, disp, metas, m) => layout(me, NAV_C, '/metas', `<div class="hello"><h1>Metas de ahorro</h1><p class="s">Disponible para abonar: <b>$ ${money(disp)}</b>. El dinero que abones a una meta queda <b>bloqueado</b> hasta completarla.</p></div>
+<div class="grid g2"><section class="card"><h2>Nueva meta</h2><form method="post" action="/metas"><label for="n">Nombre</label><input id="n" name="nombre" maxlength="40" placeholder="Ej. Vacaciones" required><label for="o">Monto objetivo en dólares</label><div class="amt"><span>$</span><input id="o" name="objetivo" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div><button>Crear meta</button></form></section>
+<section class="card"><h2>Mis metas</h2>${list(metas, (g, i) => { const done = g.ahorrado >= g.objetivo; return goalRow(g, i) + (done ? '' : `<form method="post" action="/metas/abonar/${g.id}" class="inline"><div class="amt"><span>$</span><input name="monto" inputmode="decimal" placeholder="Abonar" autocomplete="off" required></div><button class="sm">Abonar</button></form>`) + (g.ahorrado === 0 || done ? `<form method="post" action="/metas/borrar/${g.id}"><button class="sm ghost" style="margin-top:8px" onclick="return confirm('¿Eliminar esta meta?')">Eliminar</button></form>` : ''); }, 'Aún no tienes metas')}</section></div>`, m);
 function receiptP(me, x) {
   const dep = x.tipo === 'DEPOSITO';
   const r = (k, v) => `<div class="row"><span class="mu">${k}</span><b style="text-align:right">${v}</b></div>`;
   return shell(`<div class="wrap" style="max-width:640px">${top(me)}<section class="card"><div class="mu">Comprobante</div><h1>PB-${String(x.id).padStart(6, '0')}</h1>
-${r('Tipo', dep ? 'Depósito' : 'Retiro')}${r('Monto', '$ ' + money(x.centavos))}${r('Estado', `<span class="badge ${esc(x.estado)}">${esc(x.estado)}</span>`)}${r('Fecha', fecha(x.creado))}${r('Cliente', esc(x.usuarios?.nombre))}${r('Banco', bancoNombre(x.banco))}${r('Titular', esc(x.titular))}${r('Documento', esc((x.doc_tipo || '') + '-' + (x.doc_numero || '')))}${dep ? r('Referencia', esc(x.referencia)) + r('Cuenta destino', esc(x.cuentas_pago?.banco) + ' ' + esc(x.cuentas_pago?.numero)) : r('Cuenta de destino', esc(x.num_cuenta))}
+${r('Tipo', dep ? 'Depósito' : 'Retiro')}${r('Monto en dólares', '$ ' + money(x.centavos))}${x.monto_bs ? r('Monto en bolívares', 'Bs ' + money(x.monto_bs)) + r('Tasa aplicada', 'Bs ' + tasaTxt(x.tasa4) + ' por $ 1') : ''}${r('Estado', `<span class="badge ${esc(x.estado)}">${esc(x.estado)}</span>`)}${r('Fecha', fecha(x.creado))}${r('Cliente', esc(x.usuarios?.nombre))}${r('Banco', bancoNombre(x.banco))}${r('Titular', esc(x.titular))}${r('Documento', esc((x.doc_tipo || '') + '-' + (x.doc_numero || '')))}${dep ? r('Referencia', esc(x.referencia)) + r('Cuenta destino', esc(x.cuentas_pago?.banco) + ' ' + esc(x.cuentas_pago?.numero)) : r('Cuenta de destino', esc(x.num_cuenta))}
 <div class="noprint" style="margin-top:14px"><button onclick="window.print()">Imprimir o guardar PDF</button><a class="btn ghost" style="margin-top:10px" href="${me.rol === 'admin' ? '/admin' : '/panel'}">Volver</a></div></section></div>`);
 }
 
 const acts = path => `<form method="post" action="${path}" class="acts"><button class="sm" name="a" value="aprobar">Aprobar</button><button class="sm danger" name="a" value="rechazar" onclick="return confirm('¿Rechazar?')">Rechazar</button></form>`;
-const solItem = (x, i) => { const dep = x.tipo === 'DEPOSITO'; return `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div class="who"><div class="av">${initial(x.usuarios?.nombre)}</div><div><b>${esc(x.usuarios?.nombre)}</b><div class="mu">${esc(x.usuarios?.email)}</div></div></div><div style="text-align:right"><b class="${dep ? 'pos' : 'neg'}">$ ${money(x.centavos)}</b><div class="mu">${dep ? 'Depósito' : 'Retiro'}</div></div></div>
-<div class="detail"><div>Banco: ${bancoNombre(x.banco)}</div><div>Titular: ${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</div>${dep ? `<div>Referencia: <b>${esc(x.referencia)}</b></div><div>Destino: ${esc(x.cuentas_pago?.banco)} ${esc(x.cuentas_pago?.numero)}</div>` : `<div>Cuenta destino: <b>${esc(x.num_cuenta)}</b></div>`}<div>${fecha(x.creado)}</div></div>${acts('/admin/solicitud/' + x.id)}</div>`; };
+const solItem = (x, i) => {
+  const dep = x.tipo === 'DEPOSITO';
+  const conv = x.monto_bs ? (dep ? `<div>Pagó <b>Bs ${money(x.monto_bs)}</b> a ${tasaTxt(x.tasa4)} → acreditar <b>$ ${money(x.centavos)}</b></div>` : `<div>Retira <b>$ ${money(x.centavos)}</b> a ${tasaTxt(x.tasa4)} → transferir <b>Bs ${money(x.monto_bs)}</b></div>`) : '';
+  return `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div class="who"><div class="av">${initial(x.usuarios?.nombre)}</div><div><b>${esc(x.usuarios?.nombre)}</b><div class="mu">${esc(x.usuarios?.email)}</div></div></div><div style="text-align:right"><b class="${dep ? 'pos' : 'neg'}">$ ${money(x.centavos)}</b><div class="mu">${dep ? 'Depósito' : 'Retiro'}</div></div></div>
+<div class="detail">${conv}<div>Banco: ${bancoNombre(x.banco)}</div><div>Titular: ${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</div>${dep ? `<div>Referencia: <b>${esc(x.referencia)}</b></div><div>Destino: ${esc(x.cuentas_pago?.banco)} ${esc(x.cuentas_pago?.numero)}</div>` : `<div>Cuenta destino: <b>${esc(x.num_cuenta)}</b></div>`}<div>${fecha(x.creado)}</div></div>${acts('/admin/solicitud/' + x.id)}</div>`;
+};
 const ctaRow = (c, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="vrow"><div><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div style="font-family:ui-monospace,monospace">${esc(c.numero)}</div></div><span class="badge ${c.activo ? 'APROBADO' : 'RECHAZADO'}">${c.activo ? 'Activa' : 'Inactiva'}</span></div><form method="post" action="/admin/cuenta/${c.id}"><input type="hidden" name="v" value="${c.activo ? 0 : 1}"><button class="sm ghost" style="margin-top:10px">${c.activo ? 'Desactivar' : 'Activar'}</button></form></div>`;
 function adminP(me, d, m) {
   const total = d.clientes.length, apr = d.clientes.filter(u => u.estado === 'APROBADO').length;
   const pu = d.clientes.filter(u => u.estado === 'PENDIENTE'), rech = total - apr - pu.length;
   const pct = total ? apr / total * 100 : 0;
   const sla = d.sols.filter(x => Date.now() - new Date(x.creado) > 864e5).length;
+  const t = d.tasas[0], stale = !t || Date.now() - new Date(t.creado) > 864e5;
   const n = v => `<span data-i="${v}">${v}</span>`;
   return layout(me, NAV_A, '/admin', `<div class="hello"><h1>Centro de administración</h1><p class="s">Verificación de cuentas y control de pagos</p></div>
-<div class="kpis">${kpi('hi', I.users, 'Clientes', n(total))}${kpi('', I.shield2 || I.users, 'Verificados', n(apr))}${kpi('', I.clock, 'Cuentas pendientes', n(pu.length))}${kpi('', I.wallet, 'Pagos pendientes', n(d.sols.length))}</div>
+<div class="kpis">${kpi('hi', I.users, 'Clientes', n(total))}${kpi('', I.users, 'Verificados', n(apr))}${kpi('', I.clock, 'Cuentas pendientes', n(pu.length))}${kpi('', I.wallet, 'Pagos pendientes', n(d.sols.length))}</div>
 <div class="grid g2" style="margin-top:14px"><section class="card"><h2>Estado de verificación</h2><div class="donut">${donut(pct, 'verificados')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Aprobados <b>${apr}</b></div><div><i class="dot" style="background:var(--warn)"></i>Pendientes <b>${pu.length}</b></div><div><i class="dot" style="background:var(--bad)"></i>Rechazados <b>${rech}</b></div></div></div></section>
-<section class="card"><h2>Alertas</h2><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Inicios fallidos (24 h)</span><b class="${d.fallos ? 'neg' : 'pos'}">${d.fallos}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.clock} Pagos con más de 24 h</span><b class="${sla ? 'neg' : 'pos'}">${sla}</b></div></section></div>
+<section class="card"><h2>Alertas</h2><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Inicios fallidos (24 h)</span><b class="${d.fallos ? 'neg' : 'pos'}">${d.fallos}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.clock} Pagos con más de 24 h</span><b class="${sla ? 'neg' : 'pos'}">${sla}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Tasa del día</span><b class="${stale ? 'neg' : 'pos'}">${stale ? 'Desactualizada' : 'Vigente'}</b></div></section></div>
 <section class="card" id="cola"><h2>Cola de verificación</h2>${list(pu, (x, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="who"><div class="av">${initial(x.nombre)}</div><div><b>${esc(x.nombre)}</b><div class="mu">${esc(x.cedula)} · ${esc(x.email)}</div><div class="mu">${fecha(x.creado)}</div></div></div>${acts('/admin/usuario/' + x.id)}</div>`, 'Nada pendiente')}</section>
-<section class="card" id="solicitudes"><h2>Pagos por aprobar</h2><p class="mu">Antes de aprobar un depósito, confirma el pago en el estado de cuenta del banco. Al aprobar un retiro, ya debes haber hecho la transferencia.</p>${list(d.sols, solItem, 'Nada pendiente')}</section>
-<section class="card" id="cobro"><h2>Cuentas de cobro</h2>${list(d.cuentas, ctaRow, 'Aún no hay cuentas de cobro. Agrega una para recibir depósitos.')}
+<section class="card" id="solicitudes"><h2>Pagos por aprobar</h2><p class="mu">Antes de aprobar un depósito, confirma el pago en el estado de cuenta del banco. Al aprobar un retiro, ya debes haber transferido los bolívares indicados.</p>${list(d.sols, solItem, 'Nada pendiente')}</section>
+<section class="card" id="tasa"><h2>Tasa del día (Bs por $ 1)</h2>${rateBar(t)}${stale ? '<div class="warnb">La tasa no existe o tiene más de 24 horas. Actualízala antes de recibir o aprobar pagos.</div>' : ''}
+<form method="post" action="/admin/tasa"><label for="tasa">Nueva tasa en bolívares por 1 dólar</label><input id="tasa" name="tasa" inputmode="decimal" placeholder="900,00" autocomplete="off" required><button>Publicar tasa</button></form>
+${d.tasas.length ? `<h2 style="margin-top:16px">Historial</h2>${d.tasas.map(x => `<div class="row"><span class="mu">${fecha(x.creado)} · ${esc(x.por)}</span><b>Bs ${tasaTxt(x.tasa4)}</b></div>`).join('')}` : ''}</section>
+<section class="card" id="cobro"><h2>Cuentas de cobro de la plataforma</h2>${list(d.cuentas, ctaRow, 'Aún no hay cuentas de cobro. Agrega la cuenta de la plataforma para recibir depósitos.')}
 <form method="post" action="/admin/cuenta" style="margin-top:16px"><h2>Agregar cuenta</h2><label for="cb">Banco</label><select id="cb" name="banco">${bancoOpts('')}</select><label for="ct">Tipo</label><select id="ct" name="tipo"><option>Corriente</option><option>Ahorro</option></select><label for="cn">Número de cuenta (20 dígitos)</label><input id="cn" name="numero" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" required><label for="cti">Titular</label><input id="cti" name="titular" maxlength="80" required><label for="cd">Documento o RIF del titular</label><input id="cd" name="doc" maxlength="20" placeholder="J-123456789" required><button>Guardar cuenta</button></form></section>
 <section class="card" id="auditoria"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(d.logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section>`, m);
 }
+
+async function getTasa(env) { const r = await sb(env, 'GET', 'tasas?order=id.desc&limit=1&select=*'); return arr(r)[0] || null; }
+async function enMetas(env, uid) { const r = await sb(env, 'GET', `metas?user_id=eq.${uid}&select=ahorrado,objetivo`); return arr(r).filter(g => g.ahorrado < g.objetivo).reduce((a, g) => a + g.ahorrado, 0); }
 
 async function route(req, env) {
   const u = new URL(req.url), path = u.pathname, post = req.method === 'POST';
@@ -424,54 +452,70 @@ async function route(req, env) {
   if (path === '/panel' && !post) {
     if (me.rol === 'admin') return go('/admin');
     if (me.estado !== 'APROBADO') return html(pendP(me, m));
-    const [lb, so, pe, mt] = await Promise.all([
+    const [lb, so, pe, mt, ta] = await Promise.all([
       sb(env, 'GET', `libro?user_id=eq.${me.id}&order=id.desc&select=centavos,creado`),
       sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&order=id.desc&limit=8&select=*`),
       sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&estado=eq.PENDIENTE&select=id`),
-      sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`)]);
-    const rows = arr(lb);
+      sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`),
+      getTasa(env)]);
+    const rows = arr(lb), metas = arr(mt);
     let s = 0, ing = 0, egr = 0;
     for (const r of rows) { s += r.centavos; if (r.centavos > 0) ing += r.centavos; else egr -= r.centavos; }
-    return html(panelP(me, { s, ing, egr, mov: rows.slice(0, 25), sols: arr(so), pend: arr(pe).length, metas: arr(mt) }, m));
+    const bloq = metas.filter(g => g.ahorrado < g.objetivo).reduce((a, g) => a + g.ahorrado, 0);
+    return html(panelP(me, { s, ing, egr, bloq, mov: rows.slice(0, 25), sols: arr(so), pend: arr(pe).length, metas, tasa: ta }, m));
   }
 
   if (path === '/depositar') {
     if (!cli) return NO();
-    if (!post) return html(depositP(me, arr(await sb(env, 'GET', 'cuentas_pago?activo=eq.true&order=id&select=*')) , m));
-    const c = cents(f('monto')), cuenta = Number(f('cuenta')), banco = f('banco');
+    if (!post) {
+      const [ct, ta] = await Promise.all([sb(env, 'GET', 'cuentas_pago?activo=eq.true&order=id&select=*'), getTasa(env)]);
+      return html(depositP(me, arr(ct), ta, m));
+    }
+    const bs = centsMax(f('monto'), 1e10), cuenta = Number(f('cuenta')), banco = f('banco');
     const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
     const ref = f('referencia').trim().toUpperCase().slice(0, 30);
-    if (c === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn) || !/^[A-Z0-9-]{4,30}$/.test(ref)) return go('/depositar?m=inv');
+    if (bs === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn) || !/^[A-Z0-9-]{4,30}$/.test(ref)) return go('/depositar?m=inv');
+    const t = await getTasa(env);
+    if (!t) return go('/depositar?m=notasa');
+    const usd = Math.floor(bs * 10000 / t.tasa4);
+    if (usd < 1) return go('/depositar?m=inv');
     const ct = await sb(env, 'GET', `cuentas_pago?id=eq.${cuenta}&activo=eq.true&select=id`);
     if (!arr(ct).length) return go('/depositar?m=nocta');
     const dup = await sb(env, 'GET', `solicitudes?tipo=eq.DEPOSITO&banco=eq.${q(banco)}&referencia=eq.${q(ref)}&estado=neq.RECHAZADA&select=id&limit=1`);
     if (arr(dup).length) return go('/depositar?m=ref');
-    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: c, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
+    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: usd, monto_bs: bs, tasa4: t.tasa4, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
     if (!r.ok) { console.log('dep error', r.status, JSON.stringify(r.data)); return go('/depositar?m=inv'); }
-    await audit(env, me.email, 'SOLICITUD_DEPOSITO', String(c));
+    await audit(env, me.email, 'SOLICITUD_DEPOSITO', `Bs ${bs} tasa ${t.tasa4}`);
     return go('/panel?m=dep');
   }
 
   if (path === '/retirar') {
     if (!cli) return NO();
-    if (!post) return html(withdrawP(me, await saldo(env, me.id), m));
+    if (!post) {
+      const [sd, bl, ta] = await Promise.all([saldo(env, me.id), enMetas(env, me.id), getTasa(env)]);
+      return html(withdrawP(me, sd - bl, bl, ta, m));
+    }
     const c = cents(f('monto')), banco = f('banco'), num = f('num_cuenta').replace(/\s/g, '');
     const titular = f('titular').trim().slice(0, 80), dt = f('doc_tipo'), dn = f('doc_numero').trim();
     if (c === null || !okBanco(banco) || !/^\d{20}$/.test(num) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn)) return go('/retirar?m=inv');
-    const p = await sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&tipo=eq.RETIRO&estado=eq.PENDIENTE&select=centavos`);
+    const [sd, bl, t, p] = await Promise.all([saldo(env, me.id), enMetas(env, me.id), getTasa(env), sb(env, 'GET', `solicitudes?user_id=eq.${me.id}&tipo=eq.RETIRO&estado=eq.PENDIENTE&select=centavos`)]);
+    if (!t) return go('/retirar?m=notasa');
     const pend = arr(p).reduce((s, y) => s + y.centavos, 0);
-    if (c + pend > await saldo(env, me.id)) return go('/retirar?m=saldo');
-    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'RETIRO', centavos: c, banco, num_cuenta: num, titular, doc_tipo: dt, doc_numero: dn });
+    if (c + pend > sd - bl) return go('/retirar?m=disp');
+    const bs = Math.round(c * t.tasa4 / 10000);
+    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'RETIRO', centavos: c, monto_bs: bs, tasa4: t.tasa4, banco, num_cuenta: num, titular, doc_tipo: dt, doc_numero: dn });
     if (!r.ok) { console.log('ret error', r.status, JSON.stringify(r.data)); return go('/retirar?m=inv'); }
-    await audit(env, me.email, 'SOLICITUD_RETIRO', String(c));
+    await audit(env, me.email, 'SOLICITUD_RETIRO', `USD ${c} tasa ${t.tasa4}`);
     return go('/panel?m=ret');
   }
 
   if (path === '/metas') {
     if (!cli) return NO();
     if (!post) {
-      const mt = await sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`);
-      return html(goalsP(me, await saldo(env, me.id), arr(mt), m));
+      const [mt, sd] = await Promise.all([sb(env, 'GET', `metas?user_id=eq.${me.id}&order=id&select=*`), saldo(env, me.id)]);
+      const metas = arr(mt);
+      const bl = metas.filter(g => g.ahorrado < g.objetivo).reduce((a, g) => a + g.ahorrado, 0);
+      return html(goalsP(me, sd - bl, metas, m));
     }
     const nombre = f('nombre').trim().slice(0, 40), obj = cents(f('objetivo'));
     if (nombre.length < 2 || obj === null) return go('/metas?m=inv');
@@ -480,9 +524,21 @@ async function route(req, env) {
     await sb(env, 'POST', 'metas', { user_id: me.id, nombre, objetivo: obj });
     return go('/metas?m=meta');
   }
+  if (post && (x = path.match(/^\/metas\/abonar\/(\d+)$/))) {
+    if (!cli) return NO();
+    const c = cents(f('monto'));
+    if (c === null) return go('/metas?m=inv');
+    const r = await sb(env, 'POST', 'rpc/abonar_meta', { p_user: me.id, p_meta: Number(x[1]), p_monto: c });
+    const res = r.ok ? r.data : '';
+    if (res === 'OK') { await audit(env, me.email, 'META_ABONO', String(c)); return go('/metas?m=abono'); }
+    return go('/metas?m=' + ({ SALDO_INSUFICIENTE: 'disp', EXCEDE_META: 'exc' }[res] || 'inv'));
+  }
   if (post && (x = path.match(/^\/metas\/borrar\/(\d+)$/))) {
     if (!cli) return NO();
-    await sb(env, 'DELETE', `metas?id=eq.${x[1]}&user_id=eq.${me.id}`);
+    const g = arr(await sb(env, 'GET', `metas?id=eq.${x[1]}&user_id=eq.${me.id}&select=*`))[0];
+    if (!g) return go('/metas');
+    if (g.ahorrado > 0 && g.ahorrado < g.objetivo) return go('/metas?m=metaf');
+    await sb(env, 'DELETE', `metas?id=eq.${g.id}&user_id=eq.${me.id}&ahorrado=eq.${g.ahorrado}`);
     return go('/metas?m=metax');
   }
 
@@ -497,13 +553,14 @@ async function route(req, env) {
 
   if (path === '/admin' && !post) {
     const desde = new Date(Date.now() - 864e5).toISOString();
-    const [cl, so, ct, lg, fa] = await Promise.all([
+    const [cl, so, ct, lg, fa, ts] = await Promise.all([
       sb(env, 'GET', 'usuarios?rol=eq.cliente&order=id&select=id,nombre,cedula,email,estado,creado'),
       sb(env, 'GET', 'solicitudes?estado=eq.PENDIENTE&order=id&select=*,usuarios!solicitudes_user_id_fkey(nombre,email),cuentas_pago(banco,numero)'),
       sb(env, 'GET', 'cuentas_pago?order=id&select=*'),
       sb(env, 'GET', 'auditoria?order=id.desc&limit=30&select=*'),
-      sb(env, 'GET', `auditoria?accion=eq.LOGIN_FALLO&creado=gte.${q(desde)}&select=id`)]);
-    return html(adminP(me, { clientes: arr(cl), sols: arr(so), cuentas: arr(ct), logs: arr(lg), fallos: arr(fa).length }, m));
+      sb(env, 'GET', `auditoria?accion=eq.LOGIN_FALLO&creado=gte.${q(desde)}&select=id`),
+      sb(env, 'GET', 'tasas?order=id.desc&limit=5&select=*')]);
+    return html(adminP(me, { clientes: arr(cl), sols: arr(so), cuentas: arr(ct), logs: arr(lg), fallos: arr(fa).length, tasas: arr(ts) }, m));
   }
 
   if (post && (x = path.match(/^\/admin\/usuario\/(\d+)$/))) {
@@ -520,6 +577,15 @@ async function route(req, env) {
     if (r.ok && r.data === 'SALDO_INSUFICIENTE') return go('/admin?m=saldo');
     if (r.ok && r.data === 'OK') await audit(env, me.email, 'SOLICITUD_' + a.toUpperCase(), 'id=' + x[1]);
     return go('/admin');
+  }
+  if (post && path === '/admin/tasa') {
+    const t = f('tasa').trim().replace(',', '.');
+    if (!/^\d{1,7}(\.\d{1,4})?$/.test(t)) return go('/admin?m=inv');
+    const t4 = Math.round(parseFloat(t) * 10000);
+    if (t4 < 1) return go('/admin?m=inv');
+    const r = await sb(env, 'POST', 'tasas', { tasa4: t4, por: me.email });
+    if (r.ok) await audit(env, me.email, 'TASA_PUBLICADA', t);
+    return go(r.ok ? '/admin?m=tasa' : '/admin?m=inv');
   }
   if (post && path === '/admin/cuenta') {
     const banco = f('banco'), numero = f('numero').replace(/\s/g, ''), titular = f('titular').trim().slice(0, 80), doc = f('doc').trim().slice(0, 20);
