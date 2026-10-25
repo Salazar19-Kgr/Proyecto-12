@@ -255,6 +255,8 @@ const I = {
   alert: ic('<path d="M12 3l10 18H2zM12 10v5M12 18h.01"/>'),
 };
 const rateBar = t => t ? `<div class="rate">${I.clock}<span>Tasa del día: <b>Bs ${tasaTxt(t.tasa4)}</b> por $ 1</span><span class="mu">${fecha(t.creado)}</span></div>` : '<div class="warnb">Aún no hay tasa del día publicada.</div>';
+const depRate = t => Math.round(t.tasa4 * (10000 + (t.margen_bp || 0)) / 10000);
+const rateBarDep = t => !t ? '<div class="warnb">Aún no hay tasa del día publicada.</div>' : `<div class="rate">${I.clock}<span>Tasa de depósito: <b>Bs ${tasaTxt(depRate(t))}</b> por $ 1</span><span class="mu">Referencia Bs ${tasaTxt(t.tasa4)}${t.margen_bp ? ' + margen ' + (t.margen_bp / 100).toLocaleString('es-VE') + '%' : ''}</span></div>${t.margen_bp ? `<div class="warnb">La tasa de depósito incluye un margen de protección del ${(t.margen_bp / 100).toLocaleString('es-VE')}% sobre la tasa de referencia. Cuando completes tu meta, tus dólares se pagan en bolívares a la tasa del día, sin devaluación y sin comisiones adicionales.</div>` : ''}`;
 const NAV_C = [['/panel', 'Resumen', I.home], ['/depositar', 'Depositar', I.dep], ['/retirar', 'Retirar', I.ret], ['/metas', 'Metas', I.goal]];
 const NAV_A = [['/admin', 'Resumen', I.home], ['/admin#cola', 'Cuentas', I.users], ['/admin#solicitudes', 'Pagos', I.wallet], ['/admin#tasa', 'Tasa', I.clock], ['/admin#cobro', 'Cobro', I.bank]];
 function layout(me, nav, active, content, m) {
@@ -301,13 +303,13 @@ function panelP(me, d, m) {
 function depositP(me, cuentas, tasa, m) {
   const opts = cuentas.map((c, i) => `<label class="opt"><input type="radio" name="cuenta" value="${c.id}"${i === 0 ? ' checked' : ''}><div class="acct"><b>${esc(c.banco)} <span class="mu">${esc(c.codigo)}</span></b><div class="mu">${esc(c.tipo)} · ${esc(c.titular)} · ${esc(c.doc)}</div><div class="num">${esc(c.numero)}</div><button type="button" class="sm ghost" data-copy="${esc(c.numero)}">Copiar</button></div></label>`).join('');
   const body = !tasa ? '<div class="empty">Aún no hay tasa del día publicada. Intenta más tarde.</div>' : !cuentas.length ? '<div class="empty">El administrador aún no ha configurado una cuenta de cobro.</div>' : `<form method="post" action="/depositar"><h2>1 · Transfiere a la cuenta de la plataforma</h2>${opts}<h2 style="margin-top:20px">2 · Registra tu pago</h2>
-<label for="monto">Monto transferido en bolívares</label><div class="amt bs"><span>Bs</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="dep" data-out="o1" data-t4="${tasa.tasa4}" required></div><div class="pv" id="o1"></div>
+<label for="monto">Monto transferido en bolívares</label><div class="amt bs"><span>Bs</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="dep" data-out="o1" data-t4="${depRate(tasa)}" required></div><div class="pv" id="o1"></div>
 <label for="banco">Banco desde el que pagaste</label><select id="banco" name="banco">${bancoOpts('')}</select>
 <label for="titular">Nombre del titular de la cuenta</label><input id="titular" name="titular" value="${esc(me.nombre)}" maxlength="80" required>
 <label>Documento del titular</label><div class="row2"><select name="doc_tipo"><option>V</option><option>E</option><option>J</option><option>P</option></select><input name="doc_numero" inputmode="numeric" placeholder="Número" maxlength="10" required></div>
 <label for="ref">Número de referencia</label><input id="ref" name="referencia" maxlength="30" placeholder="Ej. 00123456" autocomplete="off" required>
 <button>Registrar depósito</button></form>`;
-  return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Tus bolívares se convierten a dólares con la tasa del día, así tu ahorro no se devalúa. Un administrador verifica el pago en el banco antes de acreditarlo.</p></div>${rateBar(tasa)}<section class="card">${body}</section>`, m);
+  return layout(me, NAV_C, '/depositar', `<div class="hello"><h1>Depositar</h1><p class="s">Tus bolívares se convierten a dólares con la tasa del día, así tu ahorro no se devalúa. Un administrador verifica el pago en el banco antes de acreditarlo.</p></div>${rateBarDep(tasa)}<section class="card">${body}</section>`, m);
 }
 const withdrawP = (me, disp, bloq, tasa, m) => layout(me, NAV_C, '/retirar', `<div class="hello"><h1>Retirar</h1><p class="s">Disponible para retirar: <b>$ ${money(disp)}</b>${bloq ? ` · En metas (bloqueado): <b>$ ${money(bloq)}</b>` : ''}</p></div>${rateBar(tasa)}<section class="card">${tasa ? `<form method="post" action="/retirar">
 <label for="monto">Monto a retirar en dólares</label><div class="amt"><span>$</span><input id="monto" name="monto" inputmode="decimal" placeholder="0,00" autocomplete="off" data-conv="ret" data-out="o2" data-t4="${tasa.tasa4}" required></div><div class="pv" id="o2"></div>
@@ -345,12 +347,12 @@ function adminP(me, d, m) {
   return layout(me, NAV_A, '/admin', `<div class="hello"><h1>Centro de administración</h1><p class="s">Verificación de cuentas y control de pagos</p></div>
 <div class="kpis">${kpi('hi', I.users, 'Clientes', n(total))}${kpi('', I.users, 'Verificados', n(apr))}${kpi('', I.clock, 'Cuentas pendientes', n(pu.length))}${kpi('', I.wallet, 'Pagos pendientes', n(d.sols.length))}</div>
 <div class="grid g2" style="margin-top:14px"><section class="card"><h2>Estado de verificación</h2><div class="donut">${donut(pct, 'verificados')}<div class="leg"><div><i class="dot" style="background:var(--a1)"></i>Aprobados <b>${apr}</b></div><div><i class="dot" style="background:var(--warn)"></i>Pendientes <b>${pu.length}</b></div><div><i class="dot" style="background:var(--bad)"></i>Rechazados <b>${rech}</b></div></div></div></section>
-<section class="card"><h2>Alertas</h2><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Inicios fallidos (24 h)</span><b class="${d.fallos ? 'neg' : 'pos'}">${d.fallos}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.clock} Pagos con más de 24 h</span><b class="${sla ? 'neg' : 'pos'}">${sla}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Tasa del día</span><b class="${stale ? 'neg' : 'pos'}">${stale ? 'Desactualizada' : 'Vigente'}</b></div></section></div>
+<section class="card"><h2>Alertas</h2><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Inicios fallidos (24 h)</span><b class="${d.fallos ? 'neg' : 'pos'}">${d.fallos}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.clock} Pagos con más de 24 h</span><b class="${sla ? 'neg' : 'pos'}">${sla}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.wallet} Dólares que debes respaldar</span><b>$ ${money(d.obl)}</b></div><div class="row"><span class="mu">Equivale hoy a</span><b>${t ? 'Bs ' + money(Math.round(d.obl * t.tasa4 / 10000)) : '—'}</b></div><div class="row"><span style="display:flex;gap:8px;align-items:center">${I.alert} Tasa del día</span><b class="${stale ? 'neg' : 'pos'}">${stale ? 'Desactualizada' : 'Vigente'}</b></div></section></div>
 <section class="card" id="cola"><h2>Cola de verificación</h2>${list(pu, (x, i) => `<div class="item" style="animation-delay:${i * 45}ms"><div class="who"><div class="av">${initial(x.nombre)}</div><div><b>${esc(x.nombre)}</b><div class="mu">${esc(x.cedula)} · ${esc(x.email)}</div><div class="mu">${fecha(x.creado)}</div></div></div>${acts('/admin/usuario/' + x.id)}</div>`, 'Nada pendiente')}</section>
 <section class="card" id="solicitudes"><h2>Pagos por aprobar</h2><p class="mu">Antes de aprobar un depósito, confirma el pago en el estado de cuenta del banco. Al aprobar un retiro, ya debes haber transferido los bolívares indicados.</p>${list(d.sols, solItem, 'Nada pendiente')}</section>
 <section class="card" id="tasa"><h2>Tasa del día (Bs por $ 1)</h2>${rateBar(t)}${stale ? '<div class="warnb">La tasa no existe o tiene más de 24 horas. Actualízala antes de recibir o aprobar pagos.</div>' : ''}
-<form method="post" action="/admin/tasa"><label for="tasa">Nueva tasa en bolívares por 1 dólar</label><input id="tasa" name="tasa" inputmode="decimal" placeholder="900,00" autocomplete="off" required><button>Publicar tasa</button></form>
-${d.tasas.length ? `<h2 style="margin-top:16px">Historial</h2>${d.tasas.map(x => `<div class="row"><span class="mu">${fecha(x.creado)} · ${esc(x.por)}</span><b>Bs ${tasaTxt(x.tasa4)}</b></div>`).join('')}` : ''}</section>
+<form method="post" action="/admin/tasa"><label for="tasa">Nueva tasa en bolívares por 1 dólar</label><input id="tasa" name="tasa" inputmode="decimal" placeholder="900,00" autocomplete="off" required><label for="mg">Margen de protección para depósitos en % (opcional)</label><input id="mg" name="margen" inputmode="decimal" placeholder="0" autocomplete="off"><button>Publicar tasa</button></form>
+${d.tasas.length ? `<h2 style="margin-top:16px">Historial</h2>${d.tasas.map(x => `<div class="row"><span class="mu">${fecha(x.creado)} · ${esc(x.por)}</span><b>Bs ${tasaTxt(x.tasa4)}${x.margen_bp ? ' · margen ' + (x.margen_bp / 100) + '%' : ''}</b></div>`).join('')}` : ''}</section>
 <section class="card" id="cobro"><h2>Cuentas de cobro de la plataforma</h2>${list(d.cuentas, ctaRow, 'Aún no hay cuentas de cobro. Agrega la cuenta de la plataforma para recibir depósitos.')}
 <form method="post" action="/admin/cuenta" style="margin-top:16px"><h2>Agregar cuenta</h2><label for="cb">Banco</label><select id="cb" name="banco">${bancoOpts('')}</select><label for="ct">Tipo</label><select id="ct" name="tipo"><option>Corriente</option><option>Ahorro</option></select><label for="cn">Número de cuenta (20 dígitos)</label><input id="cn" name="numero" inputmode="numeric" maxlength="20" pattern="[0-9]{20}" required><label for="cti">Titular</label><input id="cti" name="titular" maxlength="80" required><label for="cd">Documento o RIF del titular</label><input id="cd" name="doc" maxlength="20" placeholder="J-123456789" required><button>Guardar cuenta</button></form></section>
 <section class="card" id="auditoria"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(d.logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section>`, m);
@@ -477,15 +479,16 @@ async function route(req, env) {
     if (bs === null || !okBanco(banco) || titular.length < 3 || !['V', 'E', 'J', 'P'].includes(dt) || !/^\d{5,10}$/.test(dn) || !/^[A-Z0-9-]{4,30}$/.test(ref)) return go('/depositar?m=inv');
     const t = await getTasa(env);
     if (!t) return go('/depositar?m=notasa');
-    const usd = Math.floor(bs * 10000 / t.tasa4);
+    const tD = depRate(t);
+    const usd = Math.floor(bs * 10000 / tD);
     if (usd < 1) return go('/depositar?m=inv');
     const ct = await sb(env, 'GET', `cuentas_pago?id=eq.${cuenta}&activo=eq.true&select=id`);
     if (!arr(ct).length) return go('/depositar?m=nocta');
     const dup = await sb(env, 'GET', `solicitudes?tipo=eq.DEPOSITO&banco=eq.${q(banco)}&referencia=eq.${q(ref)}&estado=neq.RECHAZADA&select=id&limit=1`);
     if (arr(dup).length) return go('/depositar?m=ref');
-    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: usd, monto_bs: bs, tasa4: t.tasa4, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
+    const r = await sb(env, 'POST', 'solicitudes', { user_id: me.id, tipo: 'DEPOSITO', centavos: usd, monto_bs: bs, tasa4: tD, referencia: ref, banco, titular, doc_tipo: dt, doc_numero: dn, cuenta_id: cuenta });
     if (!r.ok) { console.log('dep error', r.status, JSON.stringify(r.data)); return go('/depositar?m=inv'); }
-    await audit(env, me.email, 'SOLICITUD_DEPOSITO', `Bs ${bs} tasa ${t.tasa4}`);
+    await audit(env, me.email, 'SOLICITUD_DEPOSITO', `Bs ${bs} tasa ${tD}`);
     return go('/panel?m=dep');
   }
 
@@ -553,14 +556,15 @@ async function route(req, env) {
 
   if (path === '/admin' && !post) {
     const desde = new Date(Date.now() - 864e5).toISOString();
-    const [cl, so, ct, lg, fa, ts] = await Promise.all([
+    const [cl, so, ct, lg, fa, ts, ob] = await Promise.all([
       sb(env, 'GET', 'usuarios?rol=eq.cliente&order=id&select=id,nombre,cedula,email,estado,creado'),
       sb(env, 'GET', 'solicitudes?estado=eq.PENDIENTE&order=id&select=*,usuarios!solicitudes_user_id_fkey(nombre,email),cuentas_pago(banco,numero)'),
       sb(env, 'GET', 'cuentas_pago?order=id&select=*'),
       sb(env, 'GET', 'auditoria?order=id.desc&limit=30&select=*'),
       sb(env, 'GET', `auditoria?accion=eq.LOGIN_FALLO&creado=gte.${q(desde)}&select=id`),
-      sb(env, 'GET', 'tasas?order=id.desc&limit=5&select=*')]);
-    return html(adminP(me, { clientes: arr(cl), sols: arr(so), cuentas: arr(ct), logs: arr(lg), fallos: arr(fa).length, tasas: arr(ts) }, m));
+      sb(env, 'GET', 'tasas?order=id.desc&limit=5&select=*'),
+      sb(env, 'POST', 'rpc/total_obligaciones', {})]);
+    return html(adminP(me, { clientes: arr(cl), sols: arr(so), cuentas: arr(ct), logs: arr(lg), fallos: arr(fa).length, tasas: arr(ts), obl: Number(ob.data) || 0 }, m));
   }
 
   if (post && (x = path.match(/^\/admin\/usuario\/(\d+)$/))) {
@@ -583,8 +587,10 @@ async function route(req, env) {
     if (!/^\d{1,7}(\.\d{1,4})?$/.test(t)) return go('/admin?m=inv');
     const t4 = Math.round(parseFloat(t) * 10000);
     if (t4 < 1) return go('/admin?m=inv');
-    const r = await sb(env, 'POST', 'tasas', { tasa4: t4, por: me.email });
-    if (r.ok) await audit(env, me.email, 'TASA_PUBLICADA', t);
+    const mg = f('margen').trim().replace(',', '.') || '0';
+    if (!/^\d{1,2}(\.\d{1,2})?$/.test(mg) || parseFloat(mg) > 30) return go('/admin?m=inv');
+    const r = await sb(env, 'POST', 'tasas', { tasa4: t4, margen_bp: Math.round(parseFloat(mg) * 100), por: me.email });
+    if (r.ok) await audit(env, me.email, 'TASA_PUBLICADA', t + ' margen ' + mg + '%');
     return go(r.ok ? '/admin?m=tasa' : '/admin?m=inv');
   }
   if (post && path === '/admin/cuenta') {
