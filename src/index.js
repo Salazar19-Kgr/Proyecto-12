@@ -191,6 +191,25 @@ option{background:#14122e;color:#fff}
 .warnb{background:rgba(251,191,36,.15);color:var(--warn);padding:9px 12px;border-radius:12px;font-size:13px;margin:6px 0 10px}
 .inline{display:flex;gap:8px;align-items:flex-start;margin-top:8px}.inline .amt{flex:1}.inline button{margin-top:0;width:auto;padding:14px 18px;flex:none}
 .amt.bs input{padding-left:46px}
+.rcpt{background:#fff;color:#14122e;border-radius:22px;overflow:hidden;max-width:720px;margin:14px auto;box-shadow:0 24px 70px rgba(0,0,0,.45);animation:up .6s both;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.rh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:20px 22px;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2) 60%,var(--c3))}
+.rh .brand{margin:0}.rh small{color:rgba(255,255,255,.8)}
+.rno{text-align:right}.rno span{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.8}.rno b{font-size:18px}
+.rhero{text-align:center;padding:26px 18px 10px}
+.stamp{display:inline-flex;align-items:center;gap:8px;padding:7px 14px;border-radius:99px;background:#dcfce7;color:#166534;font-weight:700;font-size:12px;letter-spacing:.08em}
+.rtype{margin-top:14px;color:#6b6a85;font-size:14px;text-transform:uppercase;letter-spacing:.12em}
+.ramt{font-size:clamp(38px,11vw,54px);font-weight:800;letter-spacing:-1.5px;line-height:1.1;margin:4px 0}
+.rsub{color:#6b6a85;font-size:14px}
+.rflow{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin:20px 22px;padding:14px;border:1px dashed #cfcde6;border-radius:16px;background:#f7f6ff}
+.rnode span{display:block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#6b6a85}.rnode b{display:block;font-size:15px}.rnode i{display:block;font-style:normal;font-size:12px;color:#6b6a85;word-break:break-word}
+.rarrow{font-size:22px;color:var(--c2);text-align:center}
+.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 22px;padding:4px 22px 6px}
+.rgrid div{padding:11px 0;border-top:1px solid #ecebf7}.rgrid span{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#6b6a85}.rgrid b{font-size:14px;word-break:break-word}
+.rf{margin-top:8px;padding:16px 22px 20px;background:#f7f6ff;border-top:1px solid #ecebf7;font-size:12px;color:#6b6a85;line-height:1.6;word-break:break-word}.rf code{font-family:ui-monospace,monospace;color:#14122e;font-size:14px;letter-spacing:2px}
+.ract{max-width:720px;margin:0 auto}
+@media(max-width:560px){.rflow{grid-template-columns:1fr}.rarrow{transform:rotate(90deg)}.rgrid{grid-template-columns:1fr}}
+@page{size:A4;margin:10mm}
+@media print{html,body{height:auto!important;min-height:0!important;background:#fff!important}.rcpt{box-shadow:none!important;margin:0 auto!important;border:1px solid #ddd;animation:none!important;break-inside:avoid;page-break-inside:avoid}.wrap{padding:0!important;max-width:none!important}.ract{display:none!important}.rflow{grid-template-columns:1fr auto 1fr!important}.rgrid{grid-template-columns:1fr 1fr!important}.rarrow{transform:none!important}}
 .mi{position:absolute;opacity:0;pointer-events:none}
 .mtabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;background:var(--inp);border:1px solid var(--line);border-radius:14px;padding:4px;margin:6px 0 14px}
 .mtabs label{margin:0;text-align:center;padding:11px;border-radius:10px;cursor:pointer;color:var(--mu);transition:.25s}
@@ -300,7 +319,7 @@ const goalRow = (g, i) => {
   const p = Math.max(0, Math.min(100, g.ahorrado / g.objetivo * 100)), done = g.ahorrado >= g.objetivo;
   return `<div class="goal" style="animation-delay:${i * 45}ms"><div class="vrow"><b>${esc(g.nombre)}</b><span class="badge ${done ? 'APROBADA' : 'PENDIENTE'}">${done ? 'Completada' : 'Bloqueada'}</span></div><div class="mu">$ ${money(g.ahorrado)} de $ ${money(g.objetivo)} · ${Math.round(p)}%</div><div class="bar"><i style="--w:${p.toFixed(1)}%"></i></div></div>`;
 };
-const actRow = r => { const dep = r.tipo === 'DEPOSITO'; return `<tr><td><b>${dep ? 'Depósito' : 'Retiro'}</b><div class="mu">${fecha(r.creado)}</div></td><td><span class="badge ${esc(r.estado)}">${esc(r.estado)}</span></td><td class="tr ${dep ? 'pos' : 'neg'}">${dep ? '+' : '−'}$ ${money(r.centavos)}${r.estado === 'APROBADA' ? `<div><a class="mu" href="/comprobante/${r.id}">Comprobante</a></div>` : ''}</td></tr>`; };
+const actRow = r => { const dep = r.tipo === 'DEPOSITO'; return `<tr><td><b>${dep ? 'Depósito' : 'Retiro'}</b><div class="mu">${fecha(r.creado)}</div></td><td><span class="badge ${esc(r.estado)}">${esc(r.estado)}</span></td><td class="tr ${dep ? 'pos' : 'neg'}">${dep ? '+' : '−'}$ ${money(r.centavos)}${r.estado === 'APROBADA' ? `<div><a class="badge APROBADA" href="/comprobante/${r.id}">Ver comprobante</a></div>` : ''}</td></tr>`; };
 
 function panelP(me, d, m) {
   const first = esc((me.nombre || '').trim().split(' ')[0]);
@@ -339,13 +358,23 @@ const withdrawP = (me, disp, bloq, tasa, m) => layout(me, NAV_C, '/retirar', `<d
 const goalsP = (me, disp, metas, m) => layout(me, NAV_C, '/metas', `<div class="hello"><h1>Metas de ahorro</h1><p class="s">Disponible para abonar: <b>$ ${money(disp)}</b>. El dinero que abones a una meta queda <b>bloqueado</b> hasta completarla.</p></div>
 <div class="grid g2"><section class="card"><h2>Nueva meta</h2><form method="post" action="/metas"><label for="n">Nombre</label><input id="n" name="nombre" maxlength="40" placeholder="Ej. Vacaciones" required><label for="o">Monto objetivo en dólares</label><div class="amt"><span>$</span><input id="o" name="objetivo" inputmode="decimal" placeholder="0,00" autocomplete="off" required></div><button>Crear meta</button></form></section>
 <section class="card"><h2>Mis metas</h2>${list(metas, (g, i) => { const done = g.ahorrado >= g.objetivo; return goalRow(g, i) + (done ? '' : `<form method="post" action="/metas/abonar/${g.id}" class="inline"><div class="amt"><span>$</span><input name="monto" inputmode="decimal" placeholder="Abonar" autocomplete="off" required></div><button class="sm">Abonar</button></form>`) + (g.ahorrado === 0 || done ? `<form method="post" action="/metas/borrar/${g.id}"><button class="sm ghost" style="margin-top:8px" onclick="return confirm('¿Eliminar esta meta?')">Eliminar</button></form>` : ''); }, 'Aún no tienes metas')}</section></div>`, m);
-function receiptP(me, x) {
+const fechaL = s => { const d = new Date(s); return isNaN(d) ? '' : d.toLocaleString('es-VE', { timeZone: 'America/Caracas', day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false }); };
+function receiptP(me, x, code, url) {
   const dep = x.tipo === 'DEPOSITO';
-  const r = (k, v) => `<div class="row"><span class="mu">${k}</span><b style="text-align:right">${v}</b></div>`;
-  return shell(`<div class="wrap" style="max-width:640px">${top(me)}<section class="card"><div class="mu">Comprobante</div><h1>PB-${String(x.id).padStart(6, '0')}</h1>
-${r('Tipo', dep ? 'Depósito' : 'Retiro')}${r('Monto en dólares', '$ ' + money(x.centavos))}${x.monto_bs ? r('Monto en bolívares', 'Bs ' + money(x.monto_bs)) + r('Tasa aplicada', 'Bs ' + tasaTxt(x.tasa4) + ' por $ 1') : ''}${r('Estado', `<span class="badge ${esc(x.estado)}">${esc(x.estado)}</span>`)}${r('Fecha', fecha(x.creado))}${r('Cliente', esc(x.usuarios?.nombre))}${r('Banco', bancoNombre(x.banco))}${r('Titular', esc(x.titular))}${r('Documento', esc((x.doc_tipo || '') + '-' + (x.doc_numero || '')))}${dep ? r('Referencia', esc(x.referencia)) + r('Cuenta destino', esc(x.cuentas_pago?.banco) + ' ' + esc(x.cuentas_pago?.numero)) : r('Cuenta de destino', esc(x.num_cuenta))}
-<div class="noprint" style="margin-top:14px"><button onclick="window.print()">Imprimir o guardar PDF</button><a class="btn ghost" style="margin-top:10px" href="${me.rol === 'admin' ? '/admin' : '/panel'}">Volver</a></div></section></div>`);
+  const movil = dep ? x.cuentas_pago?.tipo === 'Pago móvil' : (x.num_cuenta || '').length === 11;
+  const no = 'PB-' + String(x.id).padStart(6, '0');
+  const cell = (k, v) => `<div><span>${k}</span><b>${v}</b></div>`;
+  const orig = dep ? `<div class="rnode"><span>Origen</span><b>${bancoNombre(x.banco)}</b><i>${esc(x.titular)} · ${esc((x.doc_tipo || '') + '-' + (x.doc_numero || ''))}</i></div>` : `<div class="rnode"><span>Origen</span><b>Plataforma Bancaria de Ahorros</b><i>Cuenta de la plataforma</i></div>`;
+  const dest = dep ? `<div class="rnode"><span>Destino</span><b>Plataforma Bancaria de Ahorros</b><i>${esc(x.cuentas_pago?.banco)} · ${esc(x.cuentas_pago?.numero)}</i></div>` : `<div class="rnode"><span>Destino</span><b>${bancoNombre(x.banco)}</b><i>${esc(x.titular)} · ${movil ? 'Pago móvil' : 'Cuenta'} ${esc(x.num_cuenta)}</i></div>`;
+  return shell(`<div class="wrap" style="max-width:760px">${top(me)}
+<article class="rcpt"><header class="rh"><div class="brand">${LOGO}<div><b>Plataforma Bancaria de Ahorros</b><small>Comprobante de ${dep ? 'depósito' : 'retiro'}</small></div></div><div class="rno"><span>N.º</span><b>${no}</b></div></header>
+<section class="rhero"><span class="stamp">✔ OPERACIÓN APROBADA</span><div class="rtype">${dep ? 'Depósito acreditado' : 'Retiro procesado'}</div><div class="ramt">$ ${money(x.centavos)}</div>${x.monto_bs ? `<div class="rsub">Bs ${money(x.monto_bs)} · tasa Bs ${tasaTxt(x.tasa4)} por $ 1</div>` : ''}</section>
+<section class="rflow">${orig}<div class="rarrow">→</div>${dest}</section>
+<section class="rgrid">${cell('Fecha y hora', fechaL(x.creado))}${cell('Estado', 'Aprobada')}${cell('Cliente', esc(x.usuarios?.nombre))}${cell('Método', movil ? 'Pago móvil' : 'Transferencia')}${dep ? cell('Referencia', esc(x.referencia)) : cell('Monto en bolívares', x.monto_bs ? 'Bs ' + money(x.monto_bs) : '—')}${cell('Moneda de ahorro', 'Dólares (USD)')}</section>
+<footer class="rf">Este comprobante certifica que la operación fue verificada y aprobada por la administración de la plataforma. Conserva este documento como respaldo.<br>Código de verificación: <code>${esc(code)}</code><br>Verifica su autenticidad en: ${esc(url)}</footer></article>
+<div class="ract noprint"><button onclick="window.print()">Descargar PDF o imprimir</button><button class="ghost" data-u="${esc(url)}" onclick="if(navigator.share){navigator.share({title:'Comprobante ${no}',url:this.dataset.u})}else{navigator.clipboard.writeText(this.dataset.u);this.textContent='Enlace copiado'}">Compartir verificación</button><a class="btn ghost" href="${me.rol === 'admin' ? '/admin' : '/panel'}">Volver</a></div></div>`);
 }
+const verifyP = x => auth(x ? 'Comprobante auténtico' : 'No se pudo verificar', x ? 'Esta operación fue verificada y aprobada por la administración.' : 'El código no coincide con ningún comprobante aprobado.', x ? [['Número', 'PB-' + String(x.id).padStart(6, '0')], ['Tipo', x.tipo === 'DEPOSITO' ? 'Depósito' : 'Retiro'], ['Monto', '$ ' + money(x.centavos)], ['Fecha', fechaL(x.creado)]].map(([k, v]) => `<div class="row"><span class="mu">${k}</span><b>${v}</b></div>`).join('') : '', null, false);
 
 const acts = path => `<form method="post" action="${path}" class="acts"><button class="sm" name="a" value="aprobar">Aprobar</button><button class="sm danger" name="a" value="rechazar" onclick="return confirm('¿Rechazar?')">Rechazar</button></form>`;
 const solItem = (x, i) => {
@@ -378,6 +407,7 @@ ${d.tasas.length ? `<h2 style="margin-top:16px">Historial</h2>${d.tasas.map(x =>
 <section class="card" id="auditoria"><details><summary>Auditoría (últimos 30 eventos)</summary>${list(d.logs, l => `<div class="row"><div><b>${esc(l.accion)}</b> <span class="mu">${esc(l.detalle)}</span><div class="mu">${esc(l.actor)}</div></div><span class="mu">${fecha(l.creado)}</span></div>`, 'Sin eventos')}</details></section>`, m);
 }
 
+async function rcode(env, s) { return (await hmac(env.SESSION_SECRET, `rcpt:${s.id}:${s.centavos}:${s.creado}`)).slice(0, 12).toUpperCase(); }
 async function getTasa(env) { const r = await sb(env, 'GET', 'tasas?order=id.desc&limit=1&select=*'); return arr(r)[0] || null; }
 async function enMetas(env, uid) { const r = await sb(env, 'GET', `metas?user_id=eq.${uid}&select=ahorrado,objetivo`); return arr(r).filter(g => g.ahorrado < g.objetivo).reduce((a, g) => a + g.ahorrado, 0); }
 
@@ -463,6 +493,12 @@ async function route(req, env) {
     return go('/codigo?m=cod');
   }
 
+  const vm = !post && path.match(/^\/verificar\/(\d+)\/([A-Za-z0-9_-]{6,20})$/);
+  if (vm) {
+    const v = arr(await sb(env, 'GET', `solicitudes?id=eq.${vm[1]}&estado=eq.APROBADA&select=id,tipo,centavos,creado`))[0];
+    const ok = v && eq(await rcode(env, v), vm[2].toUpperCase());
+    return html(verifyP(ok ? v : null));
+  }
   if (path === '/salir' && post) return go('/login?m=bye', CLEAR);
   if (path === '/admin' && !post && !me) return html(adminLoginP(m));
   if (!me) return go('/login');
@@ -572,10 +608,11 @@ async function route(req, env) {
   }
 
   if (!post && (x = path.match(/^\/comprobante\/(\d+)$/))) {
-    const r = await sb(env, 'GET', `solicitudes?id=eq.${x[1]}&estado=eq.APROBADA&select=*,usuarios!solicitudes_user_id_fkey(nombre),cuentas_pago(banco,numero)`);
+    const r = await sb(env, 'GET', `solicitudes?id=eq.${x[1]}&estado=eq.APROBADA&select=*,usuarios!solicitudes_user_id_fkey(nombre),cuentas_pago(banco,numero,tipo)`);
     const s = arr(r)[0];
     if (!s || (me.rol !== 'admin' && s.user_id !== me.id)) return new Response('No encontrado', { status: 404 });
-    return html(receiptP(me, s));
+    const code = await rcode(env, s);
+    return html(receiptP(me, s, code, `${u.origin}/verificar/${s.id}/${code}`));
   }
 
   if (me.rol !== 'admin') return NO();
